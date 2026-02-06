@@ -2,108 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Gentle App Interruption - Design System
-   Colors from spec: Background #FFFDF9, Accent #F2D57C, Sub #9FC7B5, Text #2B2B2B / #7A7A7A
-   All colors in HSL format
+/* Bold & Playful Design System - Duolingo-inspired
+   Vibrant colors, bold shapes, fun interactions
 */
 
 @layer base {
   :root {
-    /* Main background: #FFFDF9 */
-    --background: 45 100% 98.8%;
-    --foreground: 0 0% 17%;
+    /* Warm cream background */
+    --background: 48 100% 97%;
+    --foreground: 240 10% 15%;
 
-    /* Card: same as background for soft look */
-    --card: 45 100% 98.8%;
-    --card-foreground: 0 0% 17%;
+    /* Cards with subtle warmth */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 15%;
 
-    --popover: 45 100% 98.8%;
-    --popover-foreground: 0 0% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 15%;
 
-    /* Primary accent: #F2D57C (butter yellow) */
-    --primary: 43 82% 72%;
-    --primary-foreground: 0 0% 17%;
+    /* Primary: Vibrant Sunny Yellow */
+    --primary: 45 100% 60%;
+    --primary-foreground: 240 10% 15%;
 
-    /* Secondary/Sub accent: #9FC7B5 (soft green) */
-    --secondary: 153 33% 70%;
-    --secondary-foreground: 0 0% 17%;
+    /* Secondary: Fresh Mint Green */
+    --secondary: 160 50% 55%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Muted: light version for subtle backgrounds */
-    --muted: 45 30% 95%;
-    --muted-foreground: 0 0% 48%;
+    /* Muted backgrounds */
+    --muted: 45 40% 94%;
+    --muted-foreground: 240 5% 45%;
 
-    /* Accent same as primary */
-    --accent: 43 82% 72%;
-    --accent-foreground: 0 0% 17%;
+    /* Accent: Coral/Peach for highlights */
+    --accent: 15 90% 70%;
+    --accent-foreground: 240 10% 15%;
 
-    /* No red allowed - using muted orange for destructive */
-    --destructive: 30 60% 60%;
-    --destructive-foreground: 0 0% 17%;
+    /* Tertiary: Soft lavender */
+    --tertiary: 270 60% 75%;
+    --tertiary-foreground: 240 10% 15%;
 
-    --border: 45 20% 90%;
-    --input: 45 20% 90%;
-    --ring: 43 82% 72%;
+    /* No harsh red - using soft coral for warnings */
+    --destructive: 15 70% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    /* Large border radius for soft, friendly look */
-    --radius: 1.25rem;
+    --border: 45 30% 88%;
+    --input: 45 30% 88%;
+    --ring: 45 100% 60%;
 
-    --sidebar-background: 45 100% 98.8%;
-    --sidebar-foreground: 0 0% 17%;
-    --sidebar-primary: 43 82% 72%;
-    --sidebar-primary-foreground: 0 0% 17%;
-    --sidebar-accent: 153 33% 70%;
-    --sidebar-accent-foreground: 0 0% 17%;
-    --sidebar-border: 45 20% 90%;
-    --sidebar-ring: 43 82% 72%;
+    /* Extra large radius for playful look */
+    --radius: 1.5rem;
 
-    /* Custom tokens for this app */
-    --text-secondary: 0 0% 48%;
-    --chart-bar: 43 82% 72%;
-    --chart-bar-empty: 45 20% 92%;
+    --sidebar-background: 48 100% 97%;
+    --sidebar-foreground: 240 10% 15%;
+    --sidebar-primary: 45 100% 60%;
+    --sidebar-primary-foreground: 240 10% 15%;
+    --sidebar-accent: 160 50% 55%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 45 30% 88%;
+    --sidebar-ring: 45 100% 60%;
+
+    /* Chart colors - rainbow but soft */
+    --chart-1: 45 100% 60%;
+    --chart-2: 160 50% 55%;
+    --chart-3: 15 90% 70%;
+    --chart-4: 270 60% 75%;
+    --chart-5: 200 70% 60%;
   }
 
   .dark {
-    /* Dark mode - keeping it warm and soft */
-    --background: 40 10% 12%;
-    --foreground: 45 20% 90%;
+    --background: 240 10% 10%;
+    --foreground: 45 30% 95%;
 
-    --card: 40 10% 15%;
-    --card-foreground: 45 20% 90%;
+    --card: 240 10% 14%;
+    --card-foreground: 45 30% 95%;
 
-    --popover: 40 10% 15%;
-    --popover-foreground: 45 20% 90%;
+    --popover: 240 10% 14%;
+    --popover-foreground: 45 30% 95%;
 
-    --primary: 43 82% 72%;
-    --primary-foreground: 0 0% 17%;
+    --primary: 45 100% 55%;
+    --primary-foreground: 240 10% 10%;
 
-    --secondary: 153 33% 50%;
-    --secondary-foreground: 0 0% 17%;
+    --secondary: 160 45% 45%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 40 10% 20%;
-    --muted-foreground: 45 20% 65%;
+    --muted: 240 10% 20%;
+    --muted-foreground: 45 30% 70%;
 
-    --accent: 43 82% 72%;
-    --accent-foreground: 0 0% 17%;
+    --accent: 15 80% 60%;
+    --accent-foreground: 240 10% 10%;
 
-    --destructive: 30 60% 40%;
-    --destructive-foreground: 45 20% 90%;
+    --tertiary: 270 50% 60%;
+    --tertiary-foreground: 0 0% 100%;
 
-    --border: 40 10% 25%;
-    --input: 40 10% 25%;
-    --ring: 43 82% 72%;
+    --destructive: 15 60% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --sidebar-background: 40 10% 12%;
-    --sidebar-foreground: 45 20% 90%;
-    --sidebar-primary: 43 82% 72%;
-    --sidebar-primary-foreground: 0 0% 17%;
-    --sidebar-accent: 153 33% 50%;
-    --sidebar-accent-foreground: 0 0% 17%;
-    --sidebar-border: 40 10% 25%;
-    --sidebar-ring: 43 82% 72%;
+    --border: 240 10% 25%;
+    --input: 240 10% 25%;
+    --ring: 45 100% 55%;
 
-    --text-secondary: 45 20% 65%;
-    --chart-bar: 43 82% 72%;
-    --chart-bar-empty: 40 10% 25%;
+    --sidebar-background: 240 10% 10%;
+    --sidebar-foreground: 45 30% 95%;
+    --sidebar-primary: 45 100% 55%;
+    --sidebar-primary-foreground: 240 10% 10%;
+    --sidebar-accent: 160 45% 45%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 240 10% 25%;
+    --sidebar-ring: 45 100% 55%;
+
+    --chart-1: 45 100% 55%;
+    --chart-2: 160 45% 45%;
+    --chart-3: 15 80% 60%;
+    --chart-4: 270 50% 60%;
+    --chart-5: 200 60% 50%;
   }
 }
 
@@ -114,6 +123,47 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
   }
 }
+
+@layer utilities {
+  /* Playful shadow styles */
+  .shadow-playful {
+    box-shadow: 
+      0 4px 0 0 hsl(var(--border)),
+      0 6px 20px -4px hsl(var(--foreground) / 0.1);
+  }
+  
+  .shadow-playful-lg {
+    box-shadow: 
+      0 6px 0 0 hsl(var(--border)),
+      0 10px 30px -6px hsl(var(--foreground) / 0.15);
+  }
+
+  .shadow-primary {
+    box-shadow: 
+      0 4px 0 0 hsl(45 100% 45%),
+      0 6px 20px -4px hsl(var(--primary) / 0.3);
+  }
+
+  .shadow-secondary {
+    box-shadow: 
+      0 4px 0 0 hsl(160 50% 40%),
+      0 6px 20px -4px hsl(var(--secondary) / 0.3);
+  }
+
+  .shadow-accent {
+    box-shadow: 
+      0 4px 0 0 hsl(15 90% 55%),
+      0 6px 20px -4px hsl(var(--accent) / 0.3);
+  }
+
+  /* Bounce animation for interactive elements */
+  .bounce-tap:active {
+    transform: translateY(2px);
+  }
+}
+
+/* Import playful font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
