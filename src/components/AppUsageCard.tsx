@@ -22,14 +22,14 @@ export const AppUsageCard = ({
 
   return (
     <motion.button
-      className="flex items-center gap-3 w-full text-left py-3 active:bg-muted/50 transition-colors"
+      className="flex items-center gap-2.5 w-full text-left py-2 active:bg-muted/50 transition-colors"
       initial={{ opacity: 0, x: -8 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.06 + 0.1 }}
       onClick={onClick}
     >
       {/* App icon */}
-      <div className="w-11 h-11 rounded-xl bg-muted flex items-center justify-center text-lg flex-shrink-0">
+      <div className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center text-base flex-shrink-0">
         {icon}
       </div>
 
