@@ -66,23 +66,23 @@ export const CircularProgress = ({
         {/* Time display */}
         <div className="flex items-baseline gap-0.5">
           <motion.span
-            className="text-3xl font-bold text-white tracking-tight"
+            className="text-3xl font-bold text-foreground tracking-tight"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
             {hours}
           </motion.span>
-          <span className="text-sm font-medium text-white/70">h</span>
+          <span className="text-sm font-medium text-muted-foreground">h</span>
           <motion.span
-            className="text-3xl font-bold text-white tracking-tight ml-1"
+            className="text-3xl font-bold text-foreground tracking-tight ml-1"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
             {minutes}
           </motion.span>
-          <span className="text-sm font-medium text-white/70">m</span>
+          <span className="text-sm font-medium text-muted-foreground">m</span>
         </div>
         
         {/* Remaining text */}
