@@ -16,12 +16,12 @@ export const CircularProgress = ({
   remainingText,
   className = "",
 }: SemiCircleProgressProps) => {
-  const totalSegments = 24;
+  const totalSegments = 20;
   const filledSegments = Math.round((progress / 100) * totalSegments);
   
   // Semi-circle arc from 180° to 0° (left to right)
-  const startAngle = 180;
-  const endAngle = 0;
+  const startAngle = 170;
+  const endAngle = 10;
   const angleRange = startAngle - endAngle;
   
   const segments = Array.from({ length: totalSegments }, (_, i) => {
@@ -30,15 +30,15 @@ export const CircularProgress = ({
     return { angle, isFilled, index: i };
   });
 
-  const radius = 90;
-  const segmentWidth = 8;
-  const segmentHeight = 20;
+  const radius = 85;
+  const segmentWidth = 10;
+  const segmentHeight = 24;
   const centerX = 120;
-  const centerY = 110;
+  const centerY = 100;
 
   return (
     <div className={`relative flex flex-col items-center ${className}`}>
-      <svg width="240" height="140" viewBox="0 0 240 140">
+      <svg width="240" height="120" viewBox="0 0 240 120">
         {segments.map(({ angle, isFilled, index }) => {
           const radians = (angle * Math.PI) / 180;
           const x = centerX + radius * Math.cos(radians);
@@ -69,10 +69,10 @@ export const CircularProgress = ({
       </svg>
       
       {/* Center content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-end pb-2">
+      <div className="absolute inset-0 flex flex-col items-center justify-end pb-0">
         {/* Mascot */}
         <motion.div
-          className="mb-1"
+          className="mb-0.5"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5, type: "spring" }}
