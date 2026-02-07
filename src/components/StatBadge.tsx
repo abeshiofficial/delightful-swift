@@ -1,42 +1,22 @@
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 interface StatBadgeProps {
   icon: React.ReactNode;
   label: string;
   value: string;
-  color?: "primary" | "secondary" | "accent" | "tertiary";
   delay?: number;
 }
-
-const colorClasses = {
-  primary: "bg-primary/15",
-  secondary: "bg-secondary/15",
-  accent: "bg-accent/15",
-  tertiary: "bg-tertiary/15",
-};
-
-const iconColorClasses = {
-  primary: "text-primary",
-  secondary: "text-secondary",
-  accent: "text-accent",
-  tertiary: "text-tertiary",
-};
 
 export const StatBadge = ({
   icon,
   label,
   value,
-  color = "primary",
   delay = 0,
 }: StatBadgeProps) => {
   return (
     <motion.div
-      className={cn(
-        "flex flex-col items-center gap-2 p-4 rounded-2xl",
-        colorClasses[color]
-      )}
-      initial={{ opacity: 0, y: 15 }}
+      className="flex flex-col items-center gap-1.5 py-4 px-2 rounded-2xl bg-card border border-border"
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
         delay,
@@ -45,13 +25,13 @@ export const StatBadge = ({
         damping: 20,
       }}
     >
-      <div className={cn("w-10 h-10 rounded-full bg-card flex items-center justify-center", iconColorClasses[color])}>
+      <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary">
         {icon}
       </div>
-      <span className="text-xs text-muted-foreground text-center font-medium leading-tight">
+      <span className="text-lg font-bold text-foreground">{value}</span>
+      <span className="text-[10px] text-muted-foreground text-center font-medium leading-tight">
         {label}
       </span>
-      <span className="text-lg font-bold text-foreground">{value}</span>
     </motion.div>
   );
 };

@@ -9,26 +9,25 @@ export const MiniMascot = ({ className = "" }: MiniMascotProps) => {
     <motion.div
       className={`relative ${className}`}
       animate={{
-        y: [0, -2, 0],
+        y: [0, -1.5, 0],
       }}
       transition={{
-        duration: 2,
+        duration: 2.5,
         repeat: Infinity,
         ease: "easeInOut",
       }}
     >
-      {/* Simple blob mascot */}
-      <svg width="48" height="36" viewBox="0 0 48 36" fill="none">
+      <svg width="40" height="28" viewBox="0 0 40 28" fill="none">
         {/* Body - soft blob shape */}
         <motion.ellipse
-          cx="24"
-          cy="20"
-          rx="20"
-          ry="14"
+          cx="20"
+          cy="15"
+          rx="16"
+          ry="11"
           fill="hsl(var(--primary))"
           animate={{
-            rx: [20, 21, 20],
-            ry: [14, 13.5, 14],
+            rx: [16, 16.5, 16],
+            ry: [11, 10.5, 11],
           }}
           transition={{
             duration: 3,
@@ -38,51 +37,45 @@ export const MiniMascot = ({ className = "" }: MiniMascotProps) => {
         />
         
         {/* Left eye */}
-        <motion.ellipse
-          cx="17"
-          cy="18"
-          rx="2"
-          ry="2.5"
+        <motion.circle
+          cx="14"
+          cy="13"
+          r="1.5"
           fill="hsl(var(--foreground))"
           animate={{
-            scaleY: [1, 0.2, 1],
+            scaleY: [1, 0.15, 1],
           }}
           transition={{
-            duration: 3,
+            duration: 0.2,
             repeat: Infinity,
-            repeatDelay: 2,
+            repeatDelay: 3,
           }}
         />
         
         {/* Right eye */}
-        <motion.ellipse
-          cx="31"
-          cy="18"
-          rx="2"
-          ry="2.5"
+        <motion.circle
+          cx="26"
+          cy="13"
+          r="1.5"
           fill="hsl(var(--foreground))"
           animate={{
-            scaleY: [1, 0.2, 1],
+            scaleY: [1, 0.15, 1],
           }}
           transition={{
-            duration: 3,
+            duration: 0.2,
             repeat: Infinity,
-            repeatDelay: 2,
+            repeatDelay: 3,
           }}
         />
         
         {/* Smile */}
         <path
-          d="M20 24 Q24 27 28 24"
+          d="M16 18 Q20 21 24 18"
           stroke="hsl(var(--foreground))"
-          strokeWidth="1.5"
+          strokeWidth="1.2"
           strokeLinecap="round"
           fill="none"
         />
-
-        {/* Cheeks */}
-        <circle cx="12" cy="22" r="3" fill="hsl(var(--accent))" opacity="0.5" />
-        <circle cx="36" cy="22" r="3" fill="hsl(var(--accent))" opacity="0.5" />
       </svg>
     </motion.div>
   );

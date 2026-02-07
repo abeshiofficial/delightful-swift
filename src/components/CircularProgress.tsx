@@ -13,8 +13,8 @@ interface CircularProgressProps {
 
 export const CircularProgress = ({
   progress,
-  size = 220,
-  strokeWidth = 10,
+  size = 200,
+  strokeWidth = 8,
   hours,
   minutes,
   remainingText,
@@ -48,48 +48,49 @@ export const CircularProgress = ({
           strokeDasharray={circumference}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
         />
       </svg>
       {/* Center content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        {/* Time display - smaller and refined */}
-        <div className="flex items-baseline gap-0.5 mb-1">
+      <div className="absolute inset-0 flex flex-col items-center justify-center pt-2">
+        {/* Time display */}
+        <div className="flex items-baseline gap-0.5">
           <motion.span
-            className="text-2xl font-bold text-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+            className="text-3xl font-bold text-foreground tracking-tight"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, type: "spring" }}
           >
             {hours}
           </motion.span>
-          <span className="text-sm font-medium text-muted-foreground">時間</span>
+          <span className="text-sm font-medium text-muted-foreground">h</span>
           <motion.span
-            className="text-2xl font-bold text-foreground ml-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
+            className="text-3xl font-bold text-foreground tracking-tight ml-1"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, type: "spring" }}
           >
             {minutes}
           </motion.span>
-          <span className="text-sm font-medium text-muted-foreground">分</span>
+          <span className="text-sm font-medium text-muted-foreground">m</span>
         </div>
         
         {/* Remaining text */}
         <motion.p
-          className="text-xs text-muted-foreground mb-3"
+          className="text-[11px] text-muted-foreground mt-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.5 }}
         >
           {remainingText}
         </motion.p>
 
-        {/* Mascot at bottom of circle */}
+        {/* Mascot */}
         <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
+          className="mt-2"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, type: "spring" }}
         >
           <MiniMascot />
         </motion.div>
