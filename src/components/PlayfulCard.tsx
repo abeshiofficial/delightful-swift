@@ -15,13 +15,13 @@ export const PlayfulCard = ({
   return (
     <motion.div
       className={cn(
-        "rounded-2xl p-5 bg-card border border-border shadow-card",
+        "rounded-2xl p-4 bg-card border border-border",
         hoverable && "cursor-pointer",
         className
       )}
-      whileHover={hoverable ? { y: -2, boxShadow: "0 4px 12px -4px hsl(0 0% 0% / 0.1)" } : undefined}
+      whileHover={hoverable ? { y: -2 } : undefined}
       whileTap={hoverable ? { scale: 0.98 } : undefined}
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >

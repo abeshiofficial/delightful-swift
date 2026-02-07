@@ -11,7 +11,7 @@ const getDaysOfWeek = (today: Date): { date: Date; dayName: string; dayNum: numb
   for (let i = -6; i <= 0; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
-    const dayNames = ["日", "月", "火", "水", "木", "金", "土"];
+    const dayNames = ["S", "M", "T", "W", "T", "F", "S"];
     days.push({
       date,
       dayName: dayNames[date.getDay()],
@@ -32,7 +32,7 @@ export const DaySelector = ({ selectedDate, onSelectDate }: DaySelectorProps) =>
     a.getFullYear() === b.getFullYear();
 
   return (
-    <div className="flex justify-between gap-1 px-1">
+    <div className="flex justify-between items-center">
       {days.map((day, index) => {
         const isSelected = isSameDay(day.date, selectedDate);
         return (
@@ -40,21 +40,32 @@ export const DaySelector = ({ selectedDate, onSelectDate }: DaySelectorProps) =>
             key={index}
             onClick={() => onSelectDate(day.date)}
             className={cn(
-              "flex flex-col items-center py-2 px-2 rounded-xl transition-colors min-w-[40px]",
+              "relative flex flex-col items-center py-2.5 px-3 rounded-2xl transition-all min-w-[44px]",
               isSelected
-                ? "bg-primary text-primary-foreground"
-                : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                ? "bg-primary"
+                : "hover:bg-muted/80"
             )}
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
+            transition={{ delay: index * 0.03 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="text-[10px] font-medium uppercase">
-              {day.isToday ? "Today" : day.dayName}
+            {day.isToday && (
+              <span className={cn(
+                "absolute -top-1 text-[8px] font-semibold tracking-wider",
+                isSelected ? "text-primary-foreground" : "text-primary"
+              )}>
+                Today
+              </span>
+            )}
+            <span className={cn(
+              "text-[11px] font-medium mt-1",
+              isSelected ? "text-primary-foreground/80" : "text-muted-foreground"
+            )}>
+              {day.dayName}
             </span>
             <span className={cn(
-              "text-base font-semibold mt-0.5",
+              "text-base font-semibold",
               isSelected ? "text-primary-foreground" : "text-foreground"
             )}>
               {day.dayNum}
