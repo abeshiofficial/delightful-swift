@@ -16,56 +16,49 @@ export const CircularProgress = ({
   remainingText,
   className = "",
 }: SemiCircleProgressProps) => {
-  const totalSegments = 20;
-  const filledSegments = Math.round((progress / 100) * totalSegments);
-  
-  // Semi-circle arc from 180° to 0° (left to right)
-  const startAngle = 170;
-  const endAngle = 10;
-  const angleRange = startAngle - endAngle;
-  
-  const segments = Array.from({ length: totalSegments }, (_, i) => {
-    const angle = startAngle - (i / (totalSegments - 1)) * angleRange;
-    const isFilled = i < filledSegments;
-    return { angle, isFilled, index: i };
-  });
-
-  const radius = 85;
-  const segmentWidth = 10;
-  const segmentHeight = 24;
+  const radius = 80;
+  const strokeWidth = 16;
   const centerX = 120;
   const centerY = 100;
+  
+  // Arc path for semi-circle (180° arc from left to right)
+  const startX = centerX - radius;
+  const startY = centerY;
+  const endX = centerX + radius;
+  const endY = centerY;
+  
+  // Background arc path
+  const arcPath = `M ${startX} ${startY} A ${radius} ${radius} 0 0 1 ${endX} ${endY}`;
+  
+  // Calculate the arc length for animation
+  const arcLength = Math.PI * radius;
+  const progressOffset = arcLength * (1 - progress / 100);
 
   return (
     <div className={`relative flex flex-col items-center ${className}`}>
       <svg width="240" height="120" viewBox="0 0 240 120">
-        {segments.map(({ angle, isFilled, index }) => {
-          const radians = (angle * Math.PI) / 180;
-          const x = centerX + radius * Math.cos(radians);
-          const y = centerY - radius * Math.sin(radians);
-          
-          return (
-            <motion.rect
-              key={index}
-              x={x - segmentWidth / 2}
-              y={y - segmentHeight / 2}
-              width={segmentWidth}
-              height={segmentHeight}
-              rx={segmentWidth / 2}
-              ry={segmentWidth / 2}
-              fill={isFilled ? "hsl(var(--primary))" : "hsl(var(--muted))"}
-              transform={`rotate(${-angle + 90}, ${x}, ${y})`}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ 
-                delay: index * 0.02,
-                type: "spring",
-                stiffness: 300,
-                damping: 20
-              }}
-            />
-          );
-        })}
+        {/* Background arc */}
+        <path
+          d={arcPath}
+          fill="none"
+          stroke="hsl(var(--muted))"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+        />
+        
+        {/* Progress arc */}
+        <motion.path
+          d={arcPath}
+          fill="none"
+          stroke="hsl(var(--primary))"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeDasharray={arcLength}
+          strokeDashoffset={progressOffset}
+          initial={{ strokeDashoffset: arcLength }}
+          animate={{ strokeDashoffset: progressOffset }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        />
       </svg>
       
       {/* Center content */}
