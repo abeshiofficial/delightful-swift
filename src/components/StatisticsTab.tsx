@@ -61,10 +61,9 @@ export const StatisticsTab = () => {
       initial="hidden"
       animate="visible"
     >
-      {/* Header */}
+      {/* Week label */}
       <motion.div variants={itemVariants} className="text-center pt-2">
-        <h1 className="text-2xl font-extrabold text-foreground">統計</h1>
-        <p className="text-sm font-semibold text-muted-foreground mt-1">今週</p>
+        <p className="text-sm font-semibold text-muted-foreground">今週</p>
       </motion.div>
 
       {/* Summary Card */}
