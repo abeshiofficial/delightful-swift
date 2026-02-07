@@ -73,7 +73,7 @@ export const CircularProgress = ({
           >
             {hours}
           </motion.span>
-          <span className="text-sm font-medium text-muted-foreground">h</span>
+          <span className="text-sm font-medium text-muted-foreground">時間</span>
           <motion.span
             className="text-3xl font-bold text-foreground tracking-tight ml-1"
             initial={{ opacity: 0 }}
@@ -82,7 +82,7 @@ export const CircularProgress = ({
           >
             {minutes}
           </motion.span>
-          <span className="text-sm font-medium text-muted-foreground">m</span>
+          <span className="text-sm font-medium text-muted-foreground">分</span>
         </div>
         
         {/* Remaining text */}
