@@ -52,6 +52,11 @@ export const TodayTab = () => {
   const remainingMins = remainingMinutes % 60;
   const remainingText = `目標まで ${remainingHours}h ${remainingMins}m`;
 
+  const handleAppClick = (appName: string) => {
+    // TODO: Navigate to app detail page
+    console.log(`Navigate to ${appName} detail`);
+  };
+
   return (
     <motion.div
       className="flex flex-col gap-5 px-5 pt-4 pb-28"
@@ -64,7 +69,7 @@ export const TodayTab = () => {
         <DaySelector selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       </motion.div>
 
-      {/* Main Progress */}
+      {/* Main Progress - not interactive */}
       <motion.div variants={itemVariants} className="flex justify-center py-2">
         <CircularProgress
           progress={Math.min(progress, 100)}
@@ -76,7 +81,7 @@ export const TodayTab = () => {
         />
       </motion.div>
 
-      {/* Stats Grid */}
+      {/* Stats Grid - not interactive */}
       <motion.div variants={itemVariants} className="grid grid-cols-3 gap-2">
         <StatBadge
           icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
@@ -98,10 +103,10 @@ export const TodayTab = () => {
         />
       </motion.div>
 
-      {/* Top Apps */}
+      {/* Top Apps - tappable */}
       <motion.div variants={itemVariants} className="space-y-3">
         <h2 className="text-sm font-semibold text-foreground px-1">よく使ったアプリ</h2>
-        <PlayfulCard className="space-y-3">
+        <PlayfulCard className="space-y-1">
           {mockData.topApps.map((app, index) => (
             <AppUsageCard
               key={app.name}
@@ -109,6 +114,7 @@ export const TodayTab = () => {
               minutes={app.minutes}
               icon={app.icon}
               index={index}
+              onClick={() => handleAppClick(app.name)}
             />
           ))}
         </PlayfulCard>
