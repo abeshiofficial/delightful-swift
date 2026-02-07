@@ -86,7 +86,7 @@ export const TodayTab = () => {
 
       {/* Main Progress + Stats Card */}
       <motion.div variants={itemVariants} className="relative z-10">
-        <PlayfulCard className="flex flex-col items-center py-6 gap-5 bg-white">
+        <PlayfulCard className="flex flex-col items-center py-6 gap-5 bg-white/80">
           <CircularProgress
             progress={Math.min(progress, 100)}
             hours={hours}
@@ -117,7 +117,7 @@ export const TodayTab = () => {
       {/* Top Apps */}
       <motion.div variants={itemVariants} className="space-y-3">
         <h2 className="text-sm font-semibold text-foreground px-1">よく使ったアプリ</h2>
-        <PlayfulCard className="divide-y divide-border">
+        <PlayfulCard className="divide-y divide-border bg-white">
           {mockData.topApps.map((app, index) => (
             <AppUsageCard
               key={app.name}
