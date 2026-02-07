@@ -61,11 +61,23 @@ export const TodayTab = () => {
 
   return (
     <motion.div
-      className="flex flex-col gap-6 px-5 pt-4 pb-28"
+      className="relative flex flex-col gap-6 px-5 pt-4 pb-28 min-h-screen"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
+      {/* Gradient background overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `linear-gradient(180deg, 
+            rgba(255, 180, 120, 0.4) 0%, 
+            rgba(255, 150, 180, 0.35) 15%, 
+            rgba(230, 180, 220, 0.2) 35%, 
+            transparent 60%
+          )`,
+        }}
+      />
       {/* Day Selector - no card */}
       <motion.div variants={itemVariants}>
         <DaySelector selectedDate={selectedDate} onSelectDate={setSelectedDate} />
