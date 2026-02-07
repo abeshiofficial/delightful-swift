@@ -28,11 +28,11 @@ export const WeeklyBarChart = ({
   };
 
   return (
-    <div className="relative mt-8 px-2">
+    <div className="relative mt-8 pl-2 pr-14">
       {/* Goal line */}
       {goalLine && (
         <motion.div
-          className="absolute left-0 right-12 border-t-2 border-dashed border-primary z-10"
+          className="absolute left-2 right-14 border-t-2 border-dashed border-primary z-10"
           style={{ top: getLinePosition(goalLine) }}
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
