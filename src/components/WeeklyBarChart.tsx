@@ -37,11 +37,7 @@ export const WeeklyBarChart = ({
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.5 }}
-        >
-          <span className="absolute -right-1 -top-3 text-xs text-primary font-medium bg-card px-1">
-            目標
-          </span>
-        </motion.div>
+        />
       )}
 
       {/* Chart area */}
@@ -119,6 +115,14 @@ export const WeeklyBarChart = ({
       {/* Y-axis labels */}
       <div className="absolute right-0 top-0 bottom-6 w-10 flex flex-col justify-between text-xs text-muted-foreground font-medium">
         <span>6h</span>
+        {goalLine && (
+          <span 
+            className="absolute right-0 text-primary font-medium"
+            style={{ top: getLinePosition(goalLine) - 8 }}
+          >
+            目標
+          </span>
+        )}
         <span>0h</span>
       </div>
     </div>
