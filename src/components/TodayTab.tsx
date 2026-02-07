@@ -83,33 +83,34 @@ export const TodayTab = () => {
         <DaySelector selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       </motion.div>
 
-      {/* Main Progress - no card */}
-      <motion.div variants={itemVariants} className="flex flex-col items-center">
-        <CircularProgress
-          progress={Math.min(progress, 100)}
-          hours={hours}
-          minutes={mins}
-          remainingText={remainingText}
-        />
-      </motion.div>
-      
-      {/* Stats Row - no card */}
-      <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4">
-        <StatBadge
-          icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
-          label="やめとく"
-          value={`${mockData.cancelCount}`}
-        />
-        <StatBadge
-          icon={<Flame className="w-4 h-4" strokeWidth={2.5} />}
-          label="連続達成"
-          value={`${mockData.streakDays}日`}
-        />
-        <StatBadge
-          icon={<Clock className="w-4 h-4" strokeWidth={2.5} />}
-          label="節約時間"
-          value={`${mockData.savedMinutes}m`}
-        />
+      {/* Main Progress + Stats Card */}
+      <motion.div variants={itemVariants}>
+        <PlayfulCard className="flex flex-col items-center py-6 gap-5">
+          <CircularProgress
+            progress={Math.min(progress, 100)}
+            hours={hours}
+            minutes={mins}
+            remainingText={remainingText}
+          />
+          
+          <div className="grid grid-cols-3 gap-4 w-full px-2">
+            <StatBadge
+              icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
+              label="やめとく"
+              value={`${mockData.cancelCount}`}
+            />
+            <StatBadge
+              icon={<Flame className="w-4 h-4" strokeWidth={2.5} />}
+              label="連続達成"
+              value={`${mockData.streakDays}日`}
+            />
+            <StatBadge
+              icon={<Clock className="w-4 h-4" strokeWidth={2.5} />}
+              label="節約時間"
+              value={`${mockData.savedMinutes}m`}
+            />
+          </div>
+        </PlayfulCard>
       </motion.div>
 
       {/* Top Apps */}
