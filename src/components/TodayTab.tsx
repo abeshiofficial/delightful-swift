@@ -115,7 +115,7 @@ export const TodayTab = () => {
       </motion.div>
 
       {/* Top Apps */}
-      <motion.div variants={itemVariants} className="space-y-3">
+      <motion.div variants={itemVariants} className="space-y-3 relative z-10">
         <h2 className="text-sm font-semibold text-foreground px-1">よく使ったアプリ</h2>
         <PlayfulCard className="divide-y divide-border bg-white/80">
           {mockData.topApps.map((app, index) => (
