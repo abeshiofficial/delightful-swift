@@ -78,7 +78,7 @@ export default {
         "3xl": "calc(var(--radius) + 12px)",
       },
       fontFamily: {
-        sans: ['Nunito', 'Hiragino Sans', 'sans-serif'],
+        sans: ['Inter', 'Hiragino Sans', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {

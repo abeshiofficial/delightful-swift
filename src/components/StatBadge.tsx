@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface StatBadgeProps {
-  emoji: string;
+  icon: React.ReactNode;
   label: string;
   value: string;
   color?: "primary" | "secondary" | "accent" | "tertiary";
@@ -10,14 +10,21 @@ interface StatBadgeProps {
 }
 
 const colorClasses = {
-  primary: "bg-primary/20 border-primary/30",
-  secondary: "bg-secondary/20 border-secondary/30",
-  accent: "bg-accent/20 border-accent/30",
-  tertiary: "bg-tertiary/20 border-tertiary/30",
+  primary: "bg-primary/15",
+  secondary: "bg-secondary/15",
+  accent: "bg-accent/15",
+  tertiary: "bg-tertiary/15",
+};
+
+const iconColorClasses = {
+  primary: "text-primary",
+  secondary: "text-secondary",
+  accent: "text-accent",
+  tertiary: "text-tertiary",
 };
 
 export const StatBadge = ({
-  emoji,
+  icon,
   label,
   value,
   color = "primary",
@@ -26,36 +33,25 @@ export const StatBadge = ({
   return (
     <motion.div
       className={cn(
-        "flex flex-col items-center gap-2 p-4 rounded-2xl border-2",
+        "flex flex-col items-center gap-2 p-4 rounded-2xl",
         colorClasses[color]
       )}
-      initial={{ opacity: 0, y: 20, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
         delay,
         type: "spring",
         stiffness: 200,
         damping: 20,
       }}
-      whileHover={{ scale: 1.05, rotate: [-1, 1, 0] }}
     >
-      <motion.span
-        className="text-3xl"
-        animate={{
-          rotate: [0, -10, 10, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          delay: delay + 0.5,
-          duration: 0.5,
-        }}
-      >
-        {emoji}
-      </motion.span>
-      <span className="text-xs text-muted-foreground text-center font-semibold leading-tight whitespace-pre-line">
+      <div className={cn("w-10 h-10 rounded-full bg-card flex items-center justify-center", iconColorClasses[color])}>
+        {icon}
+      </div>
+      <span className="text-xs text-muted-foreground text-center font-medium leading-tight">
         {label}
       </span>
-      <span className="text-xl font-bold text-foreground">{value}</span>
+      <span className="text-lg font-bold text-foreground">{value}</span>
     </motion.div>
   );
 };
