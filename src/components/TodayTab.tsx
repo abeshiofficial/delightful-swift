@@ -52,7 +52,7 @@ export const TodayTab = () => {
   const { hours, mins } = formatTimeDisplay(mockData.usageTimeMinutes);
   const remainingHours = Math.floor(remainingMinutes / 60);
   const remainingMins = remainingMinutes % 60;
-  const remainingText = `目標まで ${remainingHours}h ${remainingMins}m`;
+  const remainingText = `目標まで残り${remainingHours}時間${remainingMins}分`;
 
   const handleAppClick = (appName: string) => {
     // TODO: Navigate to app detail page
@@ -71,10 +71,11 @@ export const TodayTab = () => {
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           background: `linear-gradient(180deg, 
-            rgba(162, 143, 249, 0.4) 0%, 
-            rgba(180, 160, 255, 0.3) 15%, 
-            rgba(200, 180, 240, 0.15) 35%, 
-            transparent 60%
+            rgba(162, 143, 249, 0.5) 0%, 
+            rgba(200, 150, 200, 0.4) 20%, 
+            rgba(255, 180, 150, 0.3) 45%, 
+            rgba(255, 220, 150, 0.15) 65%, 
+            transparent 85%
           )`,
         }}
       />
