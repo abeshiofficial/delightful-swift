@@ -1,33 +1,32 @@
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { PlayfulCard } from "@/components/PlayfulCard";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { WeeklyBarChart } from "@/components/WeeklyBarChart";
-import { AppUsageCard } from "@/components/AppUsageCard";
+import { AppUsageCardAlt } from "@/components/AppUsageCardAlt";
 
 // Mock data
 const mockWeeklyData = {
   averageMinutes: 270,
   trend: "up" as const,
   trendPercent: 15,
-  dailyData: [
-    { day: "月", minutes: 180 },
-    { day: "火", minutes: 240 },
-    { day: "水", minutes: 300 },
-    { day: "木", minutes: 280 },
-    { day: "金", minutes: 320 },
-    { day: "土", minutes: 260 },
-    { day: "日", minutes: 310 },
+  weeklyData: [
+    { label: "12/23", minutes: 180, isCurrent: false },
+    { label: "12/30", minutes: 240, isCurrent: false },
+    { label: "1/6", minutes: 280, isCurrent: false },
+    { label: "1/13", minutes: 300, isCurrent: false },
+    { label: "1/20", minutes: 260, isCurrent: false },
+    { label: "1/27", minutes: 220, isCurrent: false },
+    { label: "2/3", minutes: 360, isCurrent: true },
   ],
-  averageLine: 270,
   goalLine: 180,
   increasedApps: [
-    { name: "TikTok", minutes: 65, icon: "🎵", color: "hsl(var(--chart-3))" },
-    { name: "Twitter", minutes: 48, icon: "🐦", color: "hsl(var(--chart-5))" },
+    { name: "TikTok", minutes: 65, icon: "🎵" },
+    { name: "Twitter", minutes: 48, icon: "𝕏" },
   ],
   decreasedApps: [
-    { name: "Instagram", minutes: 32, icon: "📸", color: "hsl(var(--chart-2))" },
-    { name: "YouTube", minutes: 28, icon: "▶️", color: "hsl(var(--chart-4))" },
+    { name: "Instagram", minutes: 32, icon: "📷" },
+    { name: "YouTube", minutes: 28, icon: "▶️" },
   ],
 };
 
@@ -70,46 +69,43 @@ export const StatisticsTab = () => {
 
       {/* Summary Card */}
       <PlayfulCard className="text-center py-6">
-        {/* Trend Badge */}
+        {/* Trend Badge - Black background */}
         <motion.div
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4 ${
-            isUp ? "bg-accent/20" : "bg-secondary/20"
-          }`}
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full mb-4 bg-foreground"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 300, delay: 0.2 }}
         >
           {isUp ? (
-            <TrendingUp className="w-5 h-5 text-accent" />
+            <ArrowUpRight className="w-4 h-4 text-background" strokeWidth={2.5} />
           ) : (
-            <TrendingDown className="w-5 h-5 text-secondary" />
+            <ArrowDownRight className="w-4 h-4 text-background" strokeWidth={2.5} />
           )}
-          <span className={`font-bold ${isUp ? "text-accent" : "text-secondary"}`}>
+          <span className="font-bold text-background text-sm">
             {mockWeeklyData.trendPercent}% {isUp ? "増加" : "減少"}
           </span>
         </motion.div>
 
         {/* Average Time */}
-        <div className="flex items-baseline justify-center gap-1 mb-2">
+        <div className="flex items-baseline justify-center gap-0.5 mb-1">
           <AnimatedNumber value={hours} className="text-5xl font-black text-foreground" />
-          <span className="text-xl font-bold text-muted-foreground">時間</span>
+          <span className="text-base font-medium text-muted-foreground">時間</span>
           <AnimatedNumber value={mins} className="text-5xl font-black text-foreground" />
-          <span className="text-xl font-bold text-muted-foreground">分</span>
+          <span className="text-base font-medium text-muted-foreground">分</span>
         </div>
 
         <motion.p
-          className="text-sm font-semibold text-muted-foreground"
+          className="text-sm text-muted-foreground"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          1日あたりの平均スクリーンタイム
+          毎週の1日あたり平均利用時間
         </motion.p>
 
         {/* Bar Chart */}
         <WeeklyBarChart
-          data={mockWeeklyData.dailyData}
-          averageLine={mockWeeklyData.averageLine}
+          data={mockWeeklyData.weeklyData}
           goalLine={mockWeeklyData.goalLine}
         />
       </PlayfulCard>
@@ -119,39 +115,41 @@ export const StatisticsTab = () => {
         {/* Increased Apps */}
         <motion.div variants={itemVariants} className="space-y-3">
           <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-accent" />
+            <ArrowUpRight className="w-4 h-4 text-foreground" strokeWidth={2.5} />
             <h2 className="text-sm font-bold text-foreground">利用が増えた</h2>
           </div>
-          <PlayfulCard className="space-y-2 p-3">
+          <div className="space-y-2">
             {mockWeeklyData.increasedApps.map((app, index) => (
-              <AppUsageCard
+              <AppUsageCardAlt
                 key={app.name}
                 name={app.name}
                 minutes={app.minutes}
                 icon={app.icon}
                 index={index}
+                trend="up"
               />
             ))}
-          </PlayfulCard>
+          </div>
         </motion.div>
 
         {/* Decreased Apps */}
         <motion.div variants={itemVariants} className="space-y-3">
           <div className="flex items-center gap-2">
-            <TrendingDown className="w-4 h-4 text-secondary" />
+            <ArrowDownRight className="w-4 h-4 text-foreground" strokeWidth={2.5} />
             <h2 className="text-sm font-bold text-foreground">利用が減った</h2>
           </div>
-          <PlayfulCard className="space-y-2 p-3">
+          <div className="space-y-2">
             {mockWeeklyData.decreasedApps.map((app, index) => (
-              <AppUsageCard
+              <AppUsageCardAlt
                 key={app.name}
                 name={app.name}
                 minutes={app.minutes}
                 icon={app.icon}
                 index={index}
+                trend="down"
               />
             ))}
-          </PlayfulCard>
+          </div>
         </motion.div>
       </div>
     </motion.div>
