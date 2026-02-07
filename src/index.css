@@ -19,25 +19,25 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
 
-    /* Primary: Mint Green accent */
-    --primary: 160 45% 65%;
-    --primary-foreground: 0 0% 13%;
+    /* Primary: Purple accent #a28ff9 */
+    --primary: 252 90% 77%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Soft lavender */
-    --secondary: 270 30% 75%;
-    --secondary-foreground: 0 0% 13%;
+    /* Secondary: Same purple */
+    --secondary: 252 90% 77%;
+    --secondary-foreground: 0 0% 100%;
 
     /* Muted: Light gray */
     --muted: 0 0% 94%;
     --muted-foreground: 0 0% 45%;
 
-    /* Accent: Coral/peach */
-    --accent: 15 70% 75%;
-    --accent-foreground: 0 0% 13%;
+    /* Accent: Same purple */
+    --accent: 252 90% 77%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Tertiary: Light blue */
-    --tertiary: 200 50% 70%;
-    --tertiary-foreground: 0 0% 13%;
+    /* Tertiary: Same purple */
+    --tertiary: 252 90% 77%;
+    --tertiary-foreground: 0 0% 100%;
 
     /* Destructive */
     --destructive: 0 60% 60%;
@@ -77,19 +77,19 @@
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 160 40% 50%;
+    --primary: 252 80% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 25% 55%;
+    --secondary: 252 80% 65%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 18%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 15 60% 60%;
+    --accent: 252 80% 65%;
     --accent-foreground: 0 0% 100%;
 
-    --tertiary: 200 40% 50%;
+    --tertiary: 252 80% 65%;
     --tertiary-foreground: 0 0% 100%;
 
     --destructive: 0 50% 50%;
