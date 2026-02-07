@@ -59,7 +59,7 @@ export const DaySelector = ({ selectedDate, onSelectDate }: DaySelectorProps) =>
               className={cn(
                 "w-10 h-10 rounded-full flex items-center justify-center transition-all",
                 isSelected
-                  ? "bg-primary text-primary-foreground"
+                  ? "bg-foreground text-background"
                   : "bg-muted text-foreground hover:bg-muted/80"
               )}
               initial={{ opacity: 0, scale: 0.8 }}

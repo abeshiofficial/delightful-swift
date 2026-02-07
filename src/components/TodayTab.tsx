@@ -85,7 +85,7 @@ export const TodayTab = () => {
 
       {/* Main Progress + Stats Card */}
       <motion.div variants={itemVariants}>
-        <PlayfulCard className="flex flex-col items-center py-6 gap-5">
+        <PlayfulCard className="flex flex-col items-center py-6 gap-5 bg-white">
           <CircularProgress
             progress={Math.min(progress, 100)}
             hours={hours}
