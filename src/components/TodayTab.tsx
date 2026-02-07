@@ -75,7 +75,7 @@ export const TodayTab = () => {
             rgba(200, 150, 200, 0.4) 20%, 
             rgba(255, 180, 150, 0.3) 45%, 
             rgba(255, 220, 150, 0.15) 65%, 
-            transparent 85%
+            hsl(var(--background)) 100%
           )`,
         }}
       />
