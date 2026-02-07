@@ -4,7 +4,7 @@ import { Hand, Flame, Clock } from "lucide-react";
 import { PlayfulCard } from "@/components/PlayfulCard";
 import { CircularProgress } from "@/components/CircularProgress";
 import { StatBadge } from "@/components/StatBadge";
-import { AppRanking } from "@/components/AppRanking";
+import { AppUsageCard } from "@/components/AppUsageCard";
 import { DaySelector } from "@/components/DaySelector";
 
 // Mock data
@@ -100,11 +100,20 @@ export const TodayTab = () => {
         />
       </motion.div>
 
-      {/* Top Apps Ranking */}
+      {/* Top Apps */}
       <motion.div variants={itemVariants} className="space-y-3">
         <h2 className="text-sm font-semibold text-foreground px-1">よく使ったアプリ</h2>
-        <PlayfulCard>
-          <AppRanking apps={mockData.topApps} onAppClick={handleAppClick} />
+        <PlayfulCard className="divide-y divide-border">
+          {mockData.topApps.map((app, index) => (
+            <AppUsageCard
+              key={app.name}
+              name={app.name}
+              minutes={app.minutes}
+              icon={app.icon}
+              index={index}
+              onClick={() => handleAppClick(app.name)}
+            />
+          ))}
         </PlayfulCard>
       </motion.div>
     </motion.div>
