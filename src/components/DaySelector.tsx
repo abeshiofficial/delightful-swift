@@ -11,10 +11,10 @@ const getDaysOfWeek = (today: Date): { date: Date; dayName: string; dayNum: numb
   for (let i = -6; i <= 0; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
-    const dayNames = ["S", "M", "T", "W", "T", "F", "S"];
+    const dayNames = ["日", "月", "火", "水", "木", "金", "土"];
     days.push({
       date,
-      dayName: dayNames[date.getDay()],
+      dayName: i === 0 ? "今日" : dayNames[date.getDay()],
       dayNum: date.getDate(),
       isToday: i === 0,
     });
@@ -32,47 +32,48 @@ export const DaySelector = ({ selectedDate, onSelectDate }: DaySelectorProps) =>
     a.getFullYear() === b.getFullYear();
 
   return (
-    <div className="flex justify-between items-center">
-      {days.map((day, index) => {
-        const isSelected = isSameDay(day.date, selectedDate);
-        return (
-          <motion.button
-            key={index}
-            onClick={() => onSelectDate(day.date)}
-            className={cn(
-              "relative flex flex-col items-center py-2.5 px-3 rounded-2xl transition-all min-w-[44px]",
-              isSelected
-                ? "bg-primary"
-                : "hover:bg-muted/80"
-            )}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
+    <div className="flex flex-col items-center gap-2">
+      {/* Weekday labels row */}
+      <div className="flex justify-between w-full">
+        {days.map((day, index) => (
+          <motion.span
+            key={`label-${index}`}
+            className="text-xs font-medium text-muted-foreground w-10 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: index * 0.03 }}
-            whileTap={{ scale: 0.95 }}
           >
-            {day.isToday && (
-              <span className={cn(
-                "absolute -top-1 text-[8px] font-semibold tracking-wider",
-                isSelected ? "text-primary-foreground" : "text-primary"
-              )}>
-                Today
+            {day.dayName}
+          </motion.span>
+        ))}
+      </div>
+      
+      {/* Date circles row */}
+      <div className="flex justify-between w-full">
+        {days.map((day, index) => {
+          const isSelected = isSameDay(day.date, selectedDate);
+          return (
+            <motion.button
+              key={index}
+              onClick={() => onSelectDate(day.date)}
+              className={cn(
+                "w-10 h-10 rounded-full flex items-center justify-center transition-all",
+                isSelected
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-foreground hover:bg-muted/80"
+              )}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.03 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="text-sm font-semibold">
+                {day.dayNum}
               </span>
-            )}
-            <span className={cn(
-              "text-[11px] font-medium mt-1",
-              isSelected ? "text-primary-foreground/80" : "text-muted-foreground"
-            )}>
-              {day.dayName}
-            </span>
-            <span className={cn(
-              "text-base font-semibold",
-              isSelected ? "text-primary-foreground" : "text-foreground"
-            )}>
-              {day.dayNum}
-            </span>
-          </motion.button>
-        );
-      })}
+            </motion.button>
+          );
+        })}
+      </div>
     </div>
   );
 };
