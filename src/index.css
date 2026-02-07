@@ -2,117 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Bold & Playful Design System - Duolingo-inspired
-   Vibrant colors, bold shapes, fun interactions
+/* Minimal & Refined Design System
+   Clean whites, grays, with mint green accent
 */
 
 @layer base {
   :root {
-    /* Warm cream background */
-    --background: 48 100% 97%;
-    --foreground: 240 10% 15%;
+    /* Pure white background */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 13%;
 
-    /* Cards with subtle warmth */
+    /* Clean white cards */
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 15%;
+    --card-foreground: 0 0% 13%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 15%;
+    --popover-foreground: 0 0% 13%;
 
-    /* Primary: Vibrant Sunny Yellow */
-    --primary: 45 100% 60%;
-    --primary-foreground: 240 10% 15%;
+    /* Primary: Mint Green accent */
+    --primary: 160 45% 65%;
+    --primary-foreground: 0 0% 13%;
 
-    /* Secondary: Fresh Mint Green */
-    --secondary: 160 50% 55%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary: Soft lavender */
+    --secondary: 270 30% 75%;
+    --secondary-foreground: 0 0% 13%;
 
-    /* Muted backgrounds */
-    --muted: 45 40% 94%;
-    --muted-foreground: 240 5% 45%;
+    /* Muted: Light gray */
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Accent: Coral/Peach for highlights */
-    --accent: 15 90% 70%;
-    --accent-foreground: 240 10% 15%;
+    /* Accent: Coral/peach */
+    --accent: 15 70% 75%;
+    --accent-foreground: 0 0% 13%;
 
-    /* Tertiary: Soft lavender */
-    --tertiary: 270 60% 75%;
-    --tertiary-foreground: 240 10% 15%;
+    /* Tertiary: Light blue */
+    --tertiary: 200 50% 70%;
+    --tertiary-foreground: 0 0% 13%;
 
-    /* No harsh red - using soft coral for warnings */
-    --destructive: 15 70% 60%;
+    /* Destructive */
+    --destructive: 0 60% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 45 30% 88%;
-    --input: 45 30% 88%;
-    --ring: 45 100% 60%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 160 45% 65%;
 
-    /* Extra large radius for playful look */
-    --radius: 1.5rem;
+    /* Softer radius for minimal look */
+    --radius: 1rem;
 
-    --sidebar-background: 48 100% 97%;
-    --sidebar-foreground: 240 10% 15%;
-    --sidebar-primary: 45 100% 60%;
-    --sidebar-primary-foreground: 240 10% 15%;
-    --sidebar-accent: 160 50% 55%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 45 30% 88%;
-    --sidebar-ring: 45 100% 60%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 13%;
+    --sidebar-primary: 160 45% 65%;
+    --sidebar-primary-foreground: 0 0% 13%;
+    --sidebar-accent: 160 45% 65%;
+    --sidebar-accent-foreground: 0 0% 13%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 160 45% 65%;
 
-    /* Chart colors - rainbow but soft */
-    --chart-1: 45 100% 60%;
-    --chart-2: 160 50% 55%;
-    --chart-3: 15 90% 70%;
-    --chart-4: 270 60% 75%;
-    --chart-5: 200 70% 60%;
+    /* Chart colors */
+    --chart-1: 160 45% 65%;
+    --chart-2: 270 30% 75%;
+    --chart-3: 15 70% 75%;
+    --chart-4: 200 50% 70%;
+    --chart-5: 45 70% 70%;
   }
 
   .dark {
-    --background: 240 10% 10%;
-    --foreground: 45 30% 95%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 240 10% 14%;
-    --card-foreground: 45 30% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 240 10% 14%;
-    --popover-foreground: 45 30% 95%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 45 100% 55%;
-    --primary-foreground: 240 10% 10%;
+    --primary: 160 40% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 160 45% 45%;
+    --secondary: 270 25% 55%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 10% 20%;
-    --muted-foreground: 45 30% 70%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 15 80% 60%;
-    --accent-foreground: 240 10% 10%;
+    --accent: 15 60% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --tertiary: 270 50% 60%;
+    --tertiary: 200 40% 50%;
     --tertiary-foreground: 0 0% 100%;
 
-    --destructive: 15 60% 50%;
+    --destructive: 0 50% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 10% 25%;
-    --input: 240 10% 25%;
-    --ring: 45 100% 55%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 160 40% 50%;
 
-    --sidebar-background: 240 10% 10%;
-    --sidebar-foreground: 45 30% 95%;
-    --sidebar-primary: 45 100% 55%;
-    --sidebar-primary-foreground: 240 10% 10%;
-    --sidebar-accent: 160 45% 45%;
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 160 40% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 40% 50%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 240 10% 25%;
-    --sidebar-ring: 45 100% 55%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 160 40% 50%;
 
-    --chart-1: 45 100% 55%;
-    --chart-2: 160 45% 45%;
-    --chart-3: 15 80% 60%;
-    --chart-4: 270 50% 60%;
-    --chart-5: 200 60% 50%;
+    --chart-1: 160 40% 50%;
+    --chart-2: 270 25% 55%;
+    --chart-3: 15 60% 60%;
+    --chart-4: 200 40% 50%;
+    --chart-5: 45 60% 55%;
   }
 }
 
@@ -123,47 +123,25 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
   }
 }
 
 @layer utilities {
-  /* Playful shadow styles */
-  .shadow-playful {
-    box-shadow: 
-      0 4px 0 0 hsl(var(--border)),
-      0 6px 20px -4px hsl(var(--foreground) / 0.1);
+  /* Clean minimal shadows */
+  .shadow-soft {
+    box-shadow: 0 2px 8px -2px hsl(0 0% 0% / 0.08);
   }
   
-  .shadow-playful-lg {
-    box-shadow: 
-      0 6px 0 0 hsl(var(--border)),
-      0 10px 30px -6px hsl(var(--foreground) / 0.15);
+  .shadow-soft-lg {
+    box-shadow: 0 4px 16px -4px hsl(0 0% 0% / 0.1);
   }
 
-  .shadow-primary {
-    box-shadow: 
-      0 4px 0 0 hsl(45 100% 45%),
-      0 6px 20px -4px hsl(var(--primary) / 0.3);
-  }
-
-  .shadow-secondary {
-    box-shadow: 
-      0 4px 0 0 hsl(160 50% 40%),
-      0 6px 20px -4px hsl(var(--secondary) / 0.3);
-  }
-
-  .shadow-accent {
-    box-shadow: 
-      0 4px 0 0 hsl(15 90% 55%),
-      0 6px 20px -4px hsl(var(--accent) / 0.3);
-  }
-
-  /* Bounce animation for interactive elements */
-  .bounce-tap:active {
-    transform: translateY(2px);
+  .shadow-card {
+    box-shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.04), 
+                0 1px 2px -1px hsl(0 0% 0% / 0.04);
   }
 }
 
-/* Import playful font */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+/* Import clean font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');

@@ -4,34 +4,24 @@ import { cn } from "@/lib/utils";
 interface PlayfulCardProps {
   children: React.ReactNode;
   className?: string;
-  variant?: "default" | "primary" | "secondary" | "accent";
   hoverable?: boolean;
 }
-
-const variants = {
-  default: "bg-card shadow-playful",
-  primary: "bg-primary shadow-primary",
-  secondary: "bg-secondary shadow-secondary text-secondary-foreground",
-  accent: "bg-accent shadow-accent",
-};
 
 export const PlayfulCard = ({
   children,
   className = "",
-  variant = "default",
   hoverable = false,
 }: PlayfulCardProps) => {
   return (
     <motion.div
       className={cn(
-        "rounded-2xl p-5",
-        variants[variant],
-        hoverable && "cursor-pointer bounce-tap",
+        "rounded-2xl p-5 bg-card border border-border shadow-card",
+        hoverable && "cursor-pointer",
         className
       )}
-      whileHover={hoverable ? { y: -4, scale: 1.02 } : undefined}
-      whileTap={hoverable ? { y: 0, scale: 0.98 } : undefined}
-      initial={{ opacity: 0, y: 20 }}
+      whileHover={hoverable ? { y: -2, boxShadow: "0 4px 12px -4px hsl(0 0% 0% / 0.1)" } : undefined}
+      whileTap={hoverable ? { scale: 0.98 } : undefined}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
