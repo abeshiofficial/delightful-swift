@@ -68,12 +68,12 @@ export const TodayTab = () => {
     >
       {/* Gradient background overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none -z-10"
+        className="absolute inset-0 pointer-events-none z-0"
         style={{
           background: `linear-gradient(180deg, 
-            rgba(255, 180, 120, 0.4) 0%, 
-            rgba(255, 150, 180, 0.35) 15%, 
-            rgba(230, 180, 220, 0.2) 35%, 
+            rgba(255, 180, 120, 0.5) 0%, 
+            rgba(255, 150, 180, 0.4) 15%, 
+            rgba(230, 180, 220, 0.25) 35%, 
             transparent 60%
           )`,
         }}
