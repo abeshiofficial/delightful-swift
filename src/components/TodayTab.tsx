@@ -69,36 +69,35 @@ export const TodayTab = () => {
         <DaySelector selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       </motion.div>
 
-      {/* Main Progress - not interactive */}
-      <motion.div variants={itemVariants} className="flex justify-center">
-        <CircularProgress
-          progress={Math.min(progress, 100)}
-          hours={hours}
-          minutes={mins}
-          remainingText={remainingText}
-        />
-      </motion.div>
-
-      {/* Stats Grid - not interactive */}
-      <motion.div variants={itemVariants} className="grid grid-cols-3 gap-2">
-        <StatBadge
-          icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
-          label="やめとく"
-          value={`${mockData.cancelCount}`}
-          delay={0.15}
-        />
-        <StatBadge
-          icon={<Flame className="w-4 h-4" strokeWidth={2.5} />}
-          label="連続達成"
-          value={`${mockData.streakDays}日`}
-          delay={0.2}
-        />
-        <StatBadge
-          icon={<Clock className="w-4 h-4" strokeWidth={2.5} />}
-          label="節約時間"
-          value={`${mockData.savedMinutes}m`}
-          delay={0.25}
-        />
+      {/* Main Progress Card with Stats */}
+      <motion.div variants={itemVariants}>
+        <PlayfulCard className="flex flex-col items-center py-6">
+          <CircularProgress
+            progress={Math.min(progress, 100)}
+            hours={hours}
+            minutes={mins}
+            remainingText={remainingText}
+          />
+          
+          {/* Stats Row */}
+          <div className="grid grid-cols-3 gap-4 w-full mt-4 pt-4 border-t border-border">
+            <StatBadge
+              icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
+              label="やめとく"
+              value={`${mockData.cancelCount}`}
+            />
+            <StatBadge
+              icon={<Flame className="w-4 h-4" strokeWidth={2.5} />}
+              label="連続達成"
+              value={`${mockData.streakDays}日`}
+            />
+            <StatBadge
+              icon={<Clock className="w-4 h-4" strokeWidth={2.5} />}
+              label="節約時間"
+              value={`${mockData.savedMinutes}m`}
+            />
+          </div>
+        </PlayfulCard>
       </motion.div>
 
       {/* Top Apps - tappable */}
