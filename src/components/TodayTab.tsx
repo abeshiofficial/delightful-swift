@@ -68,7 +68,7 @@ export const TodayTab = () => {
     >
       {/* Gradient background overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none -z-10"
         style={{
           background: `linear-gradient(180deg, 
             rgba(255, 180, 120, 0.4) 0%, 
@@ -78,13 +78,13 @@ export const TodayTab = () => {
           )`,
         }}
       />
-      {/* Day Selector - no card */}
-      <motion.div variants={itemVariants}>
+      {/* Day Selector */}
+      <motion.div variants={itemVariants} className="relative z-10">
         <DaySelector selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       </motion.div>
 
       {/* Main Progress + Stats Card */}
-      <motion.div variants={itemVariants}>
+      <motion.div variants={itemVariants} className="relative z-10">
         <PlayfulCard className="flex flex-col items-center py-6 gap-5 bg-white">
           <CircularProgress
             progress={Math.min(progress, 100)}
