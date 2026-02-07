@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { MiniMascot } from "./MiniMascot";
 
 interface SemiCircleProgressProps {
   progress: number; // 0-100
@@ -63,15 +62,6 @@ export const CircularProgress = ({
       
       {/* Center content */}
       <div className="absolute inset-0 flex flex-col items-center justify-end pb-0">
-        {/* Mascot */}
-        <motion.div
-          className="mb-0.5"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, type: "spring" }}
-        >
-          <MiniMascot />
-        </motion.div>
 
         {/* Time display */}
         <div className="flex items-baseline gap-0.5">
