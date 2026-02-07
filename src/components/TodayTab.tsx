@@ -71,9 +71,9 @@ export const TodayTab = () => {
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           background: `linear-gradient(180deg, 
-            rgba(255, 180, 120, 0.5) 0%, 
-            rgba(255, 150, 180, 0.4) 15%, 
-            rgba(230, 180, 220, 0.25) 35%, 
+            rgba(162, 143, 249, 0.4) 0%, 
+            rgba(180, 160, 255, 0.3) 15%, 
+            rgba(200, 180, 240, 0.15) 35%, 
             transparent 60%
           )`,
         }}
