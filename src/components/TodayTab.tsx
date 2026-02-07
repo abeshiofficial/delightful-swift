@@ -70,11 +70,9 @@ export const TodayTab = () => {
       </motion.div>
 
       {/* Main Progress - not interactive */}
-      <motion.div variants={itemVariants} className="flex justify-center py-2">
+      <motion.div variants={itemVariants} className="flex justify-center">
         <CircularProgress
           progress={Math.min(progress, 100)}
-          size={200}
-          strokeWidth={8}
           hours={hours}
           minutes={mins}
           remainingText={remainingText}
