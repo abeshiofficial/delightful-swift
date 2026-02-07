@@ -59,48 +59,46 @@ export const TodayTab = () => {
 
   return (
     <motion.div
-      className="flex flex-col gap-5 px-5 pt-4 pb-28"
+      className="flex flex-col gap-6 px-5 pt-4 pb-28"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      {/* Day Selector */}
+      {/* Day Selector - no card */}
       <motion.div variants={itemVariants}>
         <DaySelector selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       </motion.div>
 
-      {/* Main Progress Card with Stats */}
-      <motion.div variants={itemVariants}>
-        <PlayfulCard className="flex flex-col items-center py-6">
-          <CircularProgress
-            progress={Math.min(progress, 100)}
-            hours={hours}
-            minutes={mins}
-            remainingText={remainingText}
-          />
-          
-          {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-4 w-full mt-4 pt-4 border-t border-border">
-            <StatBadge
-              icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
-              label="やめとく"
-              value={`${mockData.cancelCount}`}
-            />
-            <StatBadge
-              icon={<Flame className="w-4 h-4" strokeWidth={2.5} />}
-              label="連続達成"
-              value={`${mockData.streakDays}日`}
-            />
-            <StatBadge
-              icon={<Clock className="w-4 h-4" strokeWidth={2.5} />}
-              label="節約時間"
-              value={`${mockData.savedMinutes}m`}
-            />
-          </div>
-        </PlayfulCard>
+      {/* Main Progress - no card */}
+      <motion.div variants={itemVariants} className="flex flex-col items-center">
+        <CircularProgress
+          progress={Math.min(progress, 100)}
+          hours={hours}
+          minutes={mins}
+          remainingText={remainingText}
+        />
+      </motion.div>
+      
+      {/* Stats Row - no card */}
+      <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4">
+        <StatBadge
+          icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
+          label="やめとく"
+          value={`${mockData.cancelCount}`}
+        />
+        <StatBadge
+          icon={<Flame className="w-4 h-4" strokeWidth={2.5} />}
+          label="連続達成"
+          value={`${mockData.streakDays}日`}
+        />
+        <StatBadge
+          icon={<Clock className="w-4 h-4" strokeWidth={2.5} />}
+          label="節約時間"
+          value={`${mockData.savedMinutes}m`}
+        />
       </motion.div>
 
-      {/* Top Apps - tappable */}
+      {/* Top Apps - tappable, still in card */}
       <motion.div variants={itemVariants} className="space-y-3">
         <h2 className="text-sm font-semibold text-foreground px-1">よく使ったアプリ</h2>
         <PlayfulCard className="space-y-1">
