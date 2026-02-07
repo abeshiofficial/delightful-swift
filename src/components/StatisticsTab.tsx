@@ -129,7 +129,6 @@ export const StatisticsTab = () => {
                 name={app.name}
                 minutes={app.minutes}
                 icon={app.icon}
-                color={app.color}
                 index={index}
               />
             ))}
@@ -149,7 +148,6 @@ export const StatisticsTab = () => {
                 name={app.name}
                 minutes={app.minutes}
                 icon={app.icon}
-                color={app.color}
                 index={index}
               />
             ))}

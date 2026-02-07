@@ -1,59 +1,46 @@
 import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 
 interface AppUsageCardProps {
   name: string;
   minutes: number;
   icon?: string;
-  color?: string;
   index?: number;
-}
-
-function formatTime(minutes: number): string {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  if (hours === 0) return `${mins}分`;
-  if (mins === 0) return `${hours}時間`;
-  return `${hours}時間${mins}分`;
+  onClick?: () => void;
 }
 
 export const AppUsageCard = ({
   name,
   minutes,
   icon = "📱",
-  color = "hsl(var(--chart-1))",
   index = 0,
+  onClick,
 }: AppUsageCardProps) => {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  const timeText = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+
   return (
-    <motion.div
-      className="flex items-center gap-4 p-3 rounded-xl bg-muted/50 hover:bg-muted transition-colors"
-      initial={{ opacity: 0, x: -20 }}
+    <motion.button
+      className="flex items-center gap-3 w-full text-left py-1.5 -mx-1 px-1 rounded-xl active:bg-muted/50 transition-colors"
+      initial={{ opacity: 0, x: -8 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{
-        delay: index * 0.1,
-        type: "spring",
-        stiffness: 200,
-      }}
-      whileHover={{ x: 4 }}
+      transition={{ delay: index * 0.08 + 0.2 }}
+      onClick={onClick}
     >
-      <motion.div
-        className="w-12 h-12 rounded-xl flex items-center justify-center text-xl"
-        style={{ backgroundColor: color }}
-        whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-        transition={{ duration: 0.3 }}
-      >
+      {/* App icon */}
+      <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center text-base flex-shrink-0">
         {icon}
-      </motion.div>
-      <div className="flex flex-col flex-1">
-        <span className="font-bold text-foreground">{name}</span>
-        <span className="text-sm text-muted-foreground">{formatTime(minutes)}</span>
       </div>
-      <motion.div
-        className="w-2 h-8 rounded-full"
-        style={{ backgroundColor: color }}
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ delay: index * 0.1 + 0.2, duration: 0.3 }}
-      />
-    </motion.div>
+
+      {/* App info */}
+      <div className="flex-1 min-w-0">
+        <p className="font-medium text-foreground text-sm truncate">{name}</p>
+        <p className="text-xs text-muted-foreground">{timeText}</p>
+      </div>
+
+      {/* Arrow */}
+      <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+    </motion.button>
   );
 };
