@@ -4,6 +4,7 @@ import { PlayfulCard } from "@/components/PlayfulCard";
 import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { WeeklyBarChart } from "@/components/WeeklyBarChart";
 import { AppUsageCardAlt } from "@/components/AppUsageCardAlt";
+import { DailyStackedChart } from "@/components/DailyStackedChart";
 
 // Mock data
 const mockWeeklyData = {
@@ -27,6 +28,17 @@ const mockWeeklyData = {
   decreasedApps: [
     { name: "Instagram", minutes: 32, icon: "📷" },
     { name: "YouTube", minutes: 28, icon: "▶️" },
+  ],
+  // Daily data for the current week
+  topAppsForWeek: ["Instagram", "YouTube", "TikTok"],
+  dailyData: [
+    { day: "日", apps: [{ name: "Instagram", minutes: 45 }, { name: "YouTube", minutes: 30 }, { name: "TikTok", minutes: 25 }, { name: "Twitter", minutes: 15 }, { name: "LINE", minutes: 10 }] },
+    { day: "月", apps: [{ name: "Instagram", minutes: 50 }, { name: "YouTube", minutes: 40 }, { name: "TikTok", minutes: 20 }, { name: "Twitter", minutes: 10 }, { name: "LINE", minutes: 15 }] },
+    { day: "火", apps: [{ name: "Instagram", minutes: 35 }, { name: "YouTube", minutes: 55 }, { name: "TikTok", minutes: 30 }, { name: "Twitter", minutes: 20 }, { name: "LINE", minutes: 5 }] },
+    { day: "水", apps: [{ name: "Instagram", minutes: 60 }, { name: "YouTube", minutes: 25 }, { name: "TikTok", minutes: 35 }, { name: "Twitter", minutes: 25 }, { name: "LINE", minutes: 10 }] },
+    { day: "木", apps: [{ name: "Instagram", minutes: 40 }, { name: "YouTube", minutes: 45 }, { name: "TikTok", minutes: 40 }, { name: "Twitter", minutes: 15 }, { name: "LINE", minutes: 20 }] },
+    { day: "金", apps: [{ name: "Instagram", minutes: 55 }, { name: "YouTube", minutes: 35 }, { name: "TikTok", minutes: 45 }, { name: "Twitter", minutes: 30 }, { name: "LINE", minutes: 10 }] },
+    { day: "土", apps: [{ name: "Instagram", minutes: 70 }, { name: "YouTube", minutes: 50 }, { name: "TikTok", minutes: 55 }, { name: "Twitter", minutes: 20 }, { name: "LINE", minutes: 25 }] },
   ],
 };
 
@@ -102,10 +114,16 @@ export const StatisticsTab = () => {
           毎週の1日あたり平均利用時間
         </motion.p>
 
-        {/* Bar Chart */}
+        {/* Weekly Bar Chart */}
         <WeeklyBarChart
           data={mockWeeklyData.weeklyData}
           goalLine={mockWeeklyData.goalLine}
+        />
+
+        {/* Daily Stacked Chart */}
+        <DailyStackedChart
+          data={mockWeeklyData.dailyData}
+          topApps={mockWeeklyData.topAppsForWeek}
         />
       </PlayfulCard>
 
