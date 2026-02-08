@@ -119,8 +119,11 @@ export const StatisticsTab = () => {
           data={mockWeeklyData.weeklyData}
           goalLine={mockWeeklyData.goalLine}
         />
+      </PlayfulCard>
 
-        {/* Daily Stacked Chart */}
+      {/* Daily Stacked Chart Card */}
+      <PlayfulCard className="py-4">
+        <h3 className="text-sm font-semibold text-foreground mb-4 px-2">今週の曜日別利用</h3>
         <DailyStackedChart
           data={mockWeeklyData.dailyData}
           topApps={mockWeeklyData.topAppsForWeek}
