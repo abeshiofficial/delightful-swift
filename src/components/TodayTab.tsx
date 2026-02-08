@@ -6,6 +6,38 @@ import { CircularProgress } from "@/components/CircularProgress";
 import { StatBadge } from "@/components/StatBadge";
 import { AppUsageCard } from "@/components/AppUsageCard";
 import { DaySelector } from "@/components/DaySelector";
+import { HourlyAreaChart } from "@/components/HourlyAreaChart";
+
+// Current hour (simulating 15:00)
+const CURRENT_HOUR = 15;
+
+// Mock hourly data (0:00 - 23:59)
+const mockHourlyData = [
+  { hour: 0, minutes: 2 },
+  { hour: 1, minutes: 0 },
+  { hour: 2, minutes: 0 },
+  { hour: 3, minutes: 0 },
+  { hour: 4, minutes: 0 },
+  { hour: 5, minutes: 0 },
+  { hour: 6, minutes: 5 },
+  { hour: 7, minutes: 15 },
+  { hour: 8, minutes: 25 },
+  { hour: 9, minutes: 18 },
+  { hour: 10, minutes: 12 },
+  { hour: 11, minutes: 20 },
+  { hour: 12, minutes: 35 },
+  { hour: 13, minutes: 28 },
+  { hour: 14, minutes: 22 },
+  { hour: 15, minutes: 18 },
+  { hour: 16, minutes: 0 },
+  { hour: 17, minutes: 0 },
+  { hour: 18, minutes: 0 },
+  { hour: 19, minutes: 0 },
+  { hour: 20, minutes: 0 },
+  { hour: 21, minutes: 0 },
+  { hour: 22, minutes: 0 },
+  { hour: 23, minutes: 0 },
+];
 
 // Mock data
 const mockData = {
@@ -111,6 +143,14 @@ export const TodayTab = () => {
               value={`${mockData.savedMinutes}m`}
             />
           </div>
+        </PlayfulCard>
+      </motion.div>
+
+      {/* Hourly Usage Chart */}
+      <motion.div variants={itemVariants} className="space-y-3 relative z-10">
+        <h2 className="text-sm font-semibold text-foreground px-1">時間別利用</h2>
+        <PlayfulCard className="bg-white/80">
+          <HourlyAreaChart data={mockHourlyData} currentHour={CURRENT_HOUR} />
         </PlayfulCard>
       </motion.div>
 
