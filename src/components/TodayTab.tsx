@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Hand, Flame, Clock } from "lucide-react";
+import { Hand, Flame, Clock, Shield, Calendar, ChevronRight } from "lucide-react";
 import { PlayfulCard } from "@/components/PlayfulCard";
 import { CircularProgress } from "@/components/CircularProgress";
 import { StatBadge } from "@/components/StatBadge";
@@ -91,6 +91,16 @@ export const TodayTab = () => {
     console.log(`Navigate to ${appName} detail`);
   };
 
+  const handleBlockedAppsClick = () => {
+    // TODO: Navigate to blocked apps list
+    console.log("Navigate to blocked apps list");
+  };
+
+  const handleScheduleClick = () => {
+    // TODO: Navigate to block schedule settings
+    console.log("Navigate to block schedule settings");
+  };
+
   return (
     <motion.div
       className="relative flex flex-col gap-6 px-5 pt-4 pb-28 min-h-screen"
@@ -144,6 +154,41 @@ export const TodayTab = () => {
             />
           </div>
         </PlayfulCard>
+      </motion.div>
+
+      {/* Quick Action Cards */}
+      <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3 relative z-10">
+        <motion.button
+          onClick={handleBlockedAppsClick}
+          className="flex items-center gap-3 p-4 rounded-2xl bg-white/80 border border-border text-left hover:bg-white/90 transition-colors"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Shield className="w-5 h-5 text-primary" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold text-foreground leading-tight">今ブロックしている</p>
+            <p className="text-xs font-semibold text-foreground leading-tight">アプリ一覧</p>
+          </div>
+          <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+        </motion.button>
+
+        <motion.button
+          onClick={handleScheduleClick}
+          className="flex items-center gap-3 p-4 rounded-2xl bg-white/80 border border-border text-left hover:bg-white/90 transition-colors"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Calendar className="w-5 h-5 text-primary" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold text-foreground leading-tight">ブロックスケジュール</p>
+            <p className="text-xs font-semibold text-foreground leading-tight">の変更</p>
+          </div>
+          <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+        </motion.button>
       </motion.div>
 
       {/* Hourly Usage Chart */}
