@@ -24,7 +24,7 @@ export const DailyStackedChart = ({
 }: DailyStackedChartProps) => {
   const chartHeight = 80; // Half the size of weekly chart
 
-  // Process data to get stacked segments for each day (100% stacked)
+  // Process data to get stacked segments for each day
   const processedData = data.map((day) => {
     const segments: { name: string; minutes: number; color: string }[] = [];
     let otherMinutes = 0;
@@ -52,60 +52,69 @@ export const DailyStackedChart = ({
       color: APP_COLORS[3],
     });
 
-    // Calculate total for percentage
+    // Calculate total for this day
     const total = segments.reduce((sum, seg) => sum + seg.minutes, 0);
 
     return {
       day: day.day,
-      segments: segments.map((seg) => ({
-        ...seg,
-        percentage: total > 0 ? (seg.minutes / total) * 100 : 0,
-      })),
+      segments,
+      total,
     };
   });
 
+  // Find max total for scaling
+  const maxTotal = Math.max(...processedData.map((d) => d.total));
+
   return (
-    <div>
+    <div className="pt-2">
       {/* Chart area */}
       <div className="flex items-end justify-between gap-2" style={{ height: chartHeight }}>
-        {processedData.map((day, dayIndex) => (
-          <div key={day.day} className="flex flex-col items-center flex-1 gap-1.5">
-            <motion.div
-              className="w-full flex flex-col-reverse overflow-hidden rounded-md"
-              style={{ maxWidth: 28, height: chartHeight }}
-              initial={{ scaleY: 0 }}
-              animate={{ scaleY: 1 }}
-              transition={{
-                delay: dayIndex * 0.05,
-                duration: 0.4,
-                type: "spring",
-                stiffness: 120,
-              }}
-            >
-              {day.segments.map((segment, segIndex) => (
-                <motion.div
-                  key={segment.name}
-                  className="w-full"
-                  style={{
-                    height: `${segment.percentage}%`,
-                    backgroundColor: segment.color,
-                  }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: dayIndex * 0.05 + segIndex * 0.05 + 0.2 }}
-                />
-              ))}
-            </motion.div>
-            <motion.span
-              className="text-[10px] font-medium text-muted-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: dayIndex * 0.05 + 0.3 }}
-            >
-              {day.day}
-            </motion.span>
-          </div>
-        ))}
+        {processedData.map((day, dayIndex) => {
+          // Calculate bar height relative to max
+          const barHeight = maxTotal > 0 ? (day.total / maxTotal) * chartHeight : 0;
+          
+          return (
+            <div key={day.day} className="flex flex-col items-center flex-1 gap-1.5">
+              <motion.div
+                className="w-full flex flex-col-reverse overflow-hidden rounded-md"
+                style={{ maxWidth: 28, height: barHeight }}
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{
+                  delay: dayIndex * 0.05,
+                  duration: 0.4,
+                  type: "spring",
+                  stiffness: 120,
+                }}
+              >
+                {day.segments.map((segment, segIndex) => {
+                  const segmentPercent = day.total > 0 ? (segment.minutes / day.total) * 100 : 0;
+                  return (
+                    <motion.div
+                      key={segment.name}
+                      className="w-full"
+                      style={{
+                        height: `${segmentPercent}%`,
+                        backgroundColor: segment.color,
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: dayIndex * 0.05 + segIndex * 0.05 + 0.2 }}
+                    />
+                  );
+                })}
+              </motion.div>
+              <motion.span
+                className="text-[10px] font-medium text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: dayIndex * 0.05 + 0.3 }}
+              >
+                {day.day}
+              </motion.span>
+            </div>
+          );
+        })}
       </div>
 
       {/* Legend */}
