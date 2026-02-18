@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import mascotImage from "@/assets/mascot.png";
 
 export type MascotMood = "neutral" | "happy" | "excited" | "sad" | "sleepy";
 
@@ -10,62 +11,64 @@ interface MascotProps {
 
 export const Mascot = ({ size = "md", mood = "neutral", className = "" }: MascotProps) => {
   const sizes = {
-    sm: { body: 48, eyeSize: 5, eyeOffset: 10, mouthY: 30 },
-    md: { body: 80, eyeSize: 7, eyeOffset: 16, mouthY: 50 },
-    lg: { body: 120, eyeSize: 11, eyeOffset: 25, mouthY: 75 },
+    sm: 64,
+    md: 96,
+    lg: 140,
   };
 
-  const { body, eyeSize, eyeOffset, mouthY } = sizes[size];
+  const bodySize = sizes[size];
 
-  // Eye shape per mood (scaleY for squint)
-  const eyeConfig: Record<MascotMood, { scaleY: number; y: number }> = {
-    neutral: { scaleY: 1,    y: 0   },
-    happy:   { scaleY: 0.55, y: -1  },
-    excited: { scaleY: 0.4,  y: -2  },
-    sad:     { scaleY: 0.8,  y: 2   },
-    sleepy:  { scaleY: 0.3,  y: 2   },
-  };
-
-  const eyeAnim = eyeConfig[mood];
-
-  // Mouth SVG path per mood
-  // Drawn in a local coordinate space centered at (0,0), width ~eyeOffset*1.6
-  const mouthHalfW = eyeOffset * 0.8;
-  const getMouthPath = (): string => {
+  // Animate per mood
+  const getBodyAnimate = () => {
     switch (mood) {
       case "excited":
-        // Big smile
-        return `M ${-mouthHalfW} 0 Q 0 ${mouthHalfW * 0.9} ${mouthHalfW} 0`;
+        return {
+          y: [0, -10, 0],
+          rotate: [0, -5, 5, -5, 0],
+          scale: [1, 1.08, 1],
+        };
       case "happy":
-        // Normal smile
-        return `M ${-mouthHalfW * 0.8} 0 Q 0 ${mouthHalfW * 0.6} ${mouthHalfW * 0.8} 0`;
+        return {
+          y: [0, -5, 0],
+          rotate: [0, -2, 2, 0],
+          scale: [1, 1.04, 1],
+        };
       case "neutral":
-        // Flat line
-        return `M ${-mouthHalfW * 0.6} 0 L ${mouthHalfW * 0.6} 0`;
-      case "sleepy":
-        // Tiny flat line
-        return `M ${-mouthHalfW * 0.4} 0 L ${mouthHalfW * 0.4} 0`;
+        return {
+          y: [0, -3, 0],
+          rotate: [0, 0, 0],
+          scale: [1, 1.02, 1],
+        };
       case "sad":
-        // Frown
-        return `M ${-mouthHalfW * 0.8} 0 Q 0 ${-mouthHalfW * 0.6} ${mouthHalfW * 0.8} 0`;
+        return {
+          y: [0, 3, 0],
+          rotate: [0, -3, 3, -3, 0],
+          scale: [1, 0.96, 1],
+        };
+      case "sleepy":
+        return {
+          y: [0, 2, 0],
+          rotate: [0, 5, 0],
+          scale: [1, 0.98, 1],
+        };
     }
   };
 
-  // Body color accent per mood
-  const bodyGlow: Record<MascotMood, string> = {
-    neutral: "hsl(var(--primary))",
-    happy:   "hsl(var(--primary))",
-    excited: "hsl(var(--primary))",
-    sad:     "hsl(220 40% 72%)",   // blueish when sad
-    sleepy:  "hsl(var(--primary))",
+  type EasingType = "easeIn" | "easeOut" | "easeInOut" | "linear";
+  const getTransition = (): { duration: number; repeat: number; ease: EasingType } => {
+    switch (mood) {
+      case "excited":
+        return { duration: 0.8, repeat: Infinity, ease: "easeInOut" };
+      case "happy":
+        return { duration: 2, repeat: Infinity, ease: "easeInOut" };
+      case "sad":
+        return { duration: 2.5, repeat: Infinity, ease: "easeInOut" };
+      case "sleepy":
+        return { duration: 3.5, repeat: Infinity, ease: "easeInOut" };
+      default:
+        return { duration: 3, repeat: Infinity, ease: "easeInOut" };
+    }
   };
-
-  // Bounce animation per mood
-  const bodyAnimate = mood === "excited"
-    ? { scale: [1, 1.06, 1], y: [0, -4, 0] }
-    : mood === "sad"
-    ? { scale: [1, 0.98, 1], y: [0, 2, 0] }
-    : { scale: [1, 1.03, 1] };
 
   return (
     <div className={`relative inline-flex items-center justify-center ${className}`}>
@@ -73,143 +76,78 @@ export const Mascot = ({ size = "md", mood = "neutral", className = "" }: Mascot
       <motion.div
         className="absolute bg-foreground/10 rounded-full blur-sm"
         style={{
-          width: body * 0.7,
-          height: body * 0.15,
-          bottom: -body * 0.05,
-        }}
-        animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.2, 0.3] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Body */}
-      <motion.div
-        className="relative rounded-full"
-        style={{
-          width: body,
-          height: body,
-          backgroundColor: bodyGlow[mood],
-          borderRadius: "47% 53% 52% 48% / 48% 47% 53% 52%",
+          width: bodySize * 0.7,
+          height: bodySize * 0.12,
+          bottom: -4,
         }}
         animate={{
-          ...bodyAnimate,
-          borderRadius: [
-            "47% 53% 52% 48% / 48% 47% 53% 52%",
-            "50% 50% 48% 52% / 52% 50% 50% 48%",
-            "47% 53% 52% 48% / 48% 47% 53% 52%",
-          ],
+          scale: mood === "excited" ? [1, 1.15, 1] : [1, 1.05, 1],
+          opacity: mood === "sad" ? [0.15, 0.25, 0.15] : [0.25, 0.15, 0.25],
         }}
-        transition={{ duration: mood === "excited" ? 1.2 : 3, repeat: Infinity, ease: "easeInOut" }}
-      >
-        {/* Cheeks */}
-        <motion.div
-          className="absolute bg-accent/40 rounded-full"
-          style={{ width: eyeSize * 2.5, height: eyeSize * 1.5, left: eyeOffset * 0.3, top: "55%" }}
-          animate={{ opacity: mood === "sad" ? [0.15, 0.25, 0.15] : [0.4, 0.6, 0.4] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bg-accent/40 rounded-full"
-          style={{ width: eyeSize * 2.5, height: eyeSize * 1.5, right: eyeOffset * 0.3, top: "55%" }}
-          animate={{ opacity: mood === "sad" ? [0.15, 0.25, 0.15] : [0.4, 0.6, 0.4] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-        />
+        transition={getTransition()}
+      />
 
-        {/* Tears when sad */}
-        {mood === "sad" && (
-          <>
-            <motion.div
-              className="absolute bg-blue-300/70 rounded-full"
-              style={{ width: eyeSize * 0.5, height: eyeSize * 1.2, left: `calc(50% - ${eyeOffset}px - ${eyeSize * 0.25}px)`, top: "48%" }}
-              animate={{ opacity: [0, 0.8, 0], y: [0, eyeSize * 0.8, eyeSize * 1.6] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeIn", delay: 0.4 }}
-            />
-            <motion.div
-              className="absolute bg-blue-300/70 rounded-full"
-              style={{ width: eyeSize * 0.5, height: eyeSize * 1.2, left: `calc(50% + ${eyeOffset}px - ${eyeSize * 0.25}px)`, top: "48%" }}
-              animate={{ opacity: [0, 0.8, 0], y: [0, eyeSize * 0.8, eyeSize * 1.6] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeIn", delay: 1.0 }}
-            />
-          </>
-        )}
+      {/* Stars when excited */}
+      {mood === "excited" && (
+        <>
+          <motion.div
+            className="absolute text-yellow-300 pointer-events-none"
+            style={{ fontSize: bodySize * 0.22, right: "-10%", top: "0%" }}
+            animate={{ rotate: [0, 20, -20, 0], scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 0.9, repeat: Infinity }}
+          >
+            ✦
+          </motion.div>
+          <motion.div
+            className="absolute text-yellow-200 pointer-events-none"
+            style={{ fontSize: bodySize * 0.16, left: "-8%", top: "10%" }}
+            animate={{ rotate: [0, -20, 20, 0], scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 1.1, repeat: Infinity, delay: 0.3 }}
+          >
+            ✦
+          </motion.div>
+        </>
+      )}
 
-        {/* Eyes */}
-        <motion.div
-          className="absolute bg-foreground rounded-full"
-          style={{
-            width: eyeSize,
-            height: eyeSize,
-            left: `calc(50% - ${eyeOffset}px - ${eyeSize / 2}px)`,
-            top: "35%",
-          }}
-          animate={{ scaleY: eyeAnim.scaleY, y: eyeAnim.y }}
-          transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
-        />
-        <motion.div
-          className="absolute bg-foreground rounded-full"
-          style={{
-            width: eyeSize,
-            height: eyeSize,
-            left: `calc(50% + ${eyeOffset}px - ${eyeSize / 2}px)`,
-            top: "35%",
-          }}
-          animate={{ scaleY: eyeAnim.scaleY, y: eyeAnim.y }}
-          transition={{ duration: 0.4, type: "spring", stiffness: 200 }}
-        />
-
-        {/* Mouth - SVG overlay */}
-        <svg
-          className="absolute"
-          style={{
-            width: body,
-            height: body * 0.5,
-            left: 0,
-            top: `${mouthY}%`,
-            overflow: "visible",
-          }}
-          viewBox={`${-body / 2} 0 ${body} ${body * 0.5}`}
-        >
-          <motion.path
-            d={getMouthPath()}
-            fill="none"
-            stroke="hsl(var(--foreground))"
-            strokeWidth={eyeSize * 0.55}
-            strokeLinecap="round"
-            initial={false}
-            animate={{ d: getMouthPath() }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+      {/* Sad tears */}
+      {mood === "sad" && (
+        <>
+          <motion.div
+            className="absolute bg-blue-300/70 rounded-full pointer-events-none"
+            style={{ width: 4, height: 8, left: "32%", top: "55%" }}
+            animate={{ opacity: [0, 0.9, 0], y: [0, 12, 20] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: "easeIn", delay: 0.3 }}
           />
-        </svg>
+          <motion.div
+            className="absolute bg-blue-300/70 rounded-full pointer-events-none"
+            style={{ width: 4, height: 8, right: "32%", top: "55%" }}
+            animate={{ opacity: [0, 0.9, 0], y: [0, 12, 20] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: "easeIn", delay: 1.0 }}
+          />
+        </>
+      )}
 
-        {/* Sparkle/highlight */}
+      {/* Mascot Image */}
+      <motion.img
+        src={mascotImage}
+        alt="mascot"
+        style={{ width: bodySize, height: bodySize, objectFit: "contain" }}
+        animate={getBodyAnimate()}
+        transition={getTransition()}
+        draggable={false}
+      />
+
+      {/* Sleepy ZZZ */}
+      {mood === "sleepy" && (
         <motion.div
-          className="absolute bg-white/60 rounded-full"
-          style={{ width: eyeSize * 1.5, height: eyeSize * 1.5, right: "15%", top: "12%" }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.8, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Stars when excited */}
-        {mood === "excited" && (
-          <>
-            <motion.div
-              className="absolute text-yellow-300"
-              style={{ fontSize: eyeSize * 1.2, right: "-20%", top: "5%" }}
-              animate={{ rotate: [0, 20, -20, 0], scale: [1, 1.3, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              ✦
-            </motion.div>
-            <motion.div
-              className="absolute text-yellow-200"
-              style={{ fontSize: eyeSize * 0.9, left: "-18%", top: "15%" }}
-              animate={{ rotate: [0, -20, 20, 0], scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }}
-            >
-              ✦
-            </motion.div>
-          </>
-        )}
-      </motion.div>
+          className="absolute font-bold text-muted-foreground pointer-events-none"
+          style={{ fontSize: bodySize * 0.18, right: "-5%", top: "0%" }}
+          animate={{ opacity: [0, 1, 0], y: [0, -8, -16], scale: [0.8, 1, 0.8] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+        >
+          z
+        </motion.div>
+      )}
     </div>
   );
 };
