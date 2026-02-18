@@ -7,6 +7,7 @@ import { StatBadge } from "@/components/StatBadge";
 import { AppUsageCard } from "@/components/AppUsageCard";
 import { DaySelector } from "@/components/DaySelector";
 import { HourlyAreaChart } from "@/components/HourlyAreaChart";
+import { Mascot, MascotMood } from "@/components/Mascot";
 
 // Current hour (simulating 15:00)
 const CURRENT_HOUR = 15;
@@ -77,6 +78,13 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
+function getMascotMood(progress: number): MascotMood {
+  if (progress >= 100) return "sad";
+  if (progress >= 80) return "neutral";
+  if (progress >= 50) return "happy";
+  return "excited";
+}
+
 export const TodayTab = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const progress = (mockData.usageTimeMinutes / mockData.goalMinutes) * 100;
@@ -85,6 +93,7 @@ export const TodayTab = () => {
   const remainingHours = Math.floor(remainingMinutes / 60);
   const remainingMins = remainingMinutes % 60;
   const remainingText = `目標まで残り${remainingHours}時間${remainingMins}分`;
+  const mascotMood = getMascotMood(progress);
 
   const handleAppClick = (appName: string) => {
     // TODO: Navigate to app detail page
@@ -129,6 +138,22 @@ export const TodayTab = () => {
       {/* Main Progress + Stats Card */}
       <motion.div variants={itemVariants} className="relative z-10">
         <PlayfulCard className="flex flex-col items-center py-6 gap-5 bg-white/80">
+          {/* Mascot reacts to goal progress */}
+          <div className="flex flex-col items-center gap-1">
+            <Mascot size="md" mood={mascotMood} />
+            <motion.p
+              key={mascotMood}
+              className="text-xs text-muted-foreground font-medium"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {mascotMood === "excited" && "最高調！このまま！🎉"}
+              {mascotMood === "happy" && "いい感じだよ👍"}
+              {mascotMood === "neutral" && "そろそろ気をつけて⚠️"}
+              {mascotMood === "sad" && "目標オーバーしちゃった😢"}
+            </motion.p>
+          </div>
           <CircularProgress
             progress={Math.min(progress, 100)}
             hours={hours}
