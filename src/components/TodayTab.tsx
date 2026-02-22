@@ -211,13 +211,32 @@ export const TodayTab = () => {
             </div>
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </div>
-          <div className="flex items-center gap-1.5">
-            <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-muted">
-              <span className="text-[10px] font-semibold text-foreground">9:00</span>
-              <span className="text-[10px] text-muted-foreground">-</span>
-              <span className="text-[10px] font-semibold text-foreground">18:00</span>
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-muted">
+                <span className="text-[10px] font-semibold text-foreground">9:00</span>
+                <span className="text-[10px] text-muted-foreground">-</span>
+                <span className="text-[10px] font-semibold text-foreground">18:00</span>
+              </div>
+              <span className="text-[10px] text-muted-foreground font-medium">稼働中</span>
             </div>
-            <span className="text-[10px] text-muted-foreground font-medium">稼働中</span>
+            <div className="flex items-center gap-0.5">
+              {["月", "火", "水", "木", "金", "土", "日"].map((day, i) => {
+                const active = i < 5; // 月〜金がアクティブ
+                return (
+                  <span
+                    key={day}
+                    className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-semibold ${
+                      active
+                        ? "bg-primary/15 text-primary"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {day}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </motion.button>
       </motion.div>
