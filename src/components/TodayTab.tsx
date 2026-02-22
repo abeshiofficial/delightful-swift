@@ -42,17 +42,17 @@ const mockHourlyData = [
 
 // Mock data
 const mockData = {
-  usageTimeMinutes: 230,
-  goalMinutes: 290,
+  usageTimeMinutes: 620, // 10時間20分
+  goalMinutes: 480, // 8時間
   cancelCount: 10,
   streakDays: 9,
   savedMinutes: 60,
   topApps: [
-    { name: "Instagram", minutes: 45, icon: "📸" },
-    { name: "YouTube", minutes: 38, icon: "▶️" },
-    { name: "X (Twitter)", minutes: 25, icon: "𝕏" },
-    { name: "TikTok", minutes: 20, icon: "🎵" },
-    { name: "LINE", minutes: 15, icon: "💬" },
+    { name: "Instagram", minutes: 120, icon: "📸" },
+    { name: "YouTube", minutes: 150, icon: "▶️" },
+    { name: "X (Twitter)", minutes: 95, icon: "𝕏" },
+    { name: "TikTok", minutes: 80, icon: "🎵" },
+    { name: "LINE", minutes: 55, icon: "💬" },
   ],
 };
 
@@ -88,11 +88,17 @@ function getMascotMood(progress: number): MascotMood {
 export const TodayTab = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const progress = (mockData.usageTimeMinutes / mockData.goalMinutes) * 100;
+  const isOverGoal = mockData.usageTimeMinutes > mockData.goalMinutes;
+  const overMinutes = mockData.usageTimeMinutes - mockData.goalMinutes;
+  const overHours = Math.floor(overMinutes / 60);
+  const overMins = overMinutes % 60;
   const remainingMinutes = mockData.goalMinutes - mockData.usageTimeMinutes;
   const { hours, mins } = formatTimeDisplay(mockData.usageTimeMinutes);
-  const remainingHours = Math.floor(remainingMinutes / 60);
-  const remainingMins = remainingMinutes % 60;
-  const remainingText = `目標まで残り${remainingHours}時間${remainingMins}分`;
+  const remainingHours = Math.floor(Math.abs(remainingMinutes) / 60);
+  const remainingMins = Math.abs(remainingMinutes) % 60;
+  const remainingText = isOverGoal
+    ? `目標を${overHours > 0 ? `${overHours}時間` : ""}${overMins}分オーバー`
+    : `目標まで残り${remainingHours}時間${remainingMins}分`;
   const mascotMood = getMascotMood(progress);
 
   const handleAppClick = (appName: string) => {
@@ -159,6 +165,7 @@ export const TodayTab = () => {
             hours={hours}
             minutes={mins}
             remainingText={remainingText}
+            isOver={isOverGoal}
           />
           
           <div className="grid grid-cols-3 gap-4 w-full px-2">
