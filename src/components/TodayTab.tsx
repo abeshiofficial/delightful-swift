@@ -192,16 +192,13 @@ export const TodayTab = () => {
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-primary" />
-              <p className="text-xs font-semibold text-foreground leading-tight">ブロック中</p>
+              <p className="text-xs font-semibold text-foreground">ブロック中</p>
             </div>
-            <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </div>
           <div className="flex items-center gap-1.5">
             {["📸", "▶️", "🎵"].map((icon, i) => (
-              <div
-                key={i}
-                className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-sm"
-              >
+              <div key={i} className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-sm">
                 {icon}
               </div>
             ))}
@@ -211,18 +208,25 @@ export const TodayTab = () => {
 
         <motion.button
           onClick={handleScheduleClick}
-          className="flex items-center gap-3 p-4 rounded-2xl bg-white/80 border border-border text-left hover:bg-white/90 transition-colors"
+          className="flex flex-col gap-3 p-4 rounded-2xl bg-white/80 border border-border text-left hover:bg-white/90 transition-colors"
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-            <Calendar className="w-5 h-5 text-primary" />
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-primary" />
+              <p className="text-xs font-semibold text-foreground">スケジュール</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-foreground leading-tight">ブロックスケジュール</p>
-            <p className="text-xs font-semibold text-foreground leading-tight">の変更</p>
+          <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-muted">
+              <span className="text-[10px] font-semibold text-foreground">9:00</span>
+              <span className="text-[10px] text-muted-foreground">-</span>
+              <span className="text-[10px] font-semibold text-foreground">18:00</span>
+            </div>
+            <span className="text-[10px] text-muted-foreground font-medium">稼働中</span>
           </div>
-          <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
         </motion.button>
       </motion.div>
 
