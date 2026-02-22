@@ -128,10 +128,10 @@ export const TodayTab = () => {
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           background: `linear-gradient(180deg, 
-            rgba(224, 160, 170, 0.5) 0%, 
-            rgba(240, 180, 180, 0.4) 20%, 
-            rgba(245, 200, 190, 0.3) 45%, 
-            rgba(250, 220, 210, 0.15) 65%, 
+            rgba(180, 160, 220, 0.5) 0%, 
+            rgba(200, 170, 230, 0.4) 20%, 
+            rgba(220, 190, 235, 0.3) 45%, 
+            rgba(235, 215, 240, 0.15) 65%, 
             hsl(var(--background)) 100%
           )`,
         }}
@@ -144,22 +144,6 @@ export const TodayTab = () => {
       {/* Main Progress + Stats Card */}
       <motion.div variants={itemVariants} className="relative z-10">
         <PlayfulCard className="flex flex-col items-center py-6 gap-5 bg-white/80">
-          {/* Mascot reacts to goal progress */}
-          <div className="flex flex-col items-center gap-1">
-            <Mascot size="md" mood={mascotMood} />
-            <motion.p
-              key={mascotMood}
-              className="text-xs text-muted-foreground font-medium"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {mascotMood === "excited" && "最高調！このまま！🎉"}
-              {mascotMood === "happy" && "いい感じだよ👍"}
-              {mascotMood === "neutral" && "そろそろ気をつけて⚠️"}
-              {mascotMood === "sad" && "目標オーバーしちゃった😢"}
-            </motion.p>
-          </div>
           <CircularProgress
             progress={Math.min(progress, 100)}
             hours={hours}
