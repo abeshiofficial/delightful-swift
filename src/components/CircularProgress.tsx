@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 
 interface SemiCircleProgressProps {
-  progress: number; // 0-100
+  progress: number; // 0-100+
   hours: number;
   minutes: number;
   remainingText: string;
+  isOver?: boolean;
   className?: string;
 }
 
@@ -13,6 +14,7 @@ export const CircularProgress = ({
   hours,
   minutes,
   remainingText,
+  isOver = false,
   className = "",
 }: SemiCircleProgressProps) => {
   const radius = 80;
@@ -31,8 +33,9 @@ export const CircularProgress = ({
   
   // Calculate the arc length for animation
   const arcLength = Math.PI * radius;
-  const progressOffset = arcLength * (1 - progress / 100);
-
+  const clampedProgress = Math.min(progress, 100);
+  const progressOffset = arcLength * (1 - clampedProgress / 100);
+  const progressColor = isOver ? "hsl(0 72% 60%)" : "hsl(var(--primary))";
   return (
     <div className={`relative flex flex-col items-center ${className}`}>
       <svg width="240" height="120" viewBox="0 0 240 120">
@@ -49,7 +52,7 @@ export const CircularProgress = ({
         <motion.path
           d={arcPath}
           fill="none"
-          stroke="hsl(var(--primary))"
+          stroke={progressColor}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeDasharray={arcLength}
@@ -66,7 +69,7 @@ export const CircularProgress = ({
         {/* Time display */}
         <div className="flex items-baseline gap-0.5">
           <motion.span
-            className="text-3xl font-bold text-foreground tracking-tight"
+            className={`text-3xl font-bold tracking-tight ${isOver ? "text-red-500" : "text-foreground"}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -75,7 +78,7 @@ export const CircularProgress = ({
           </motion.span>
           <span className="text-sm font-medium text-muted-foreground">時間</span>
           <motion.span
-            className="text-3xl font-bold text-foreground tracking-tight ml-1"
+            className={`text-3xl font-bold tracking-tight ml-1 ${isOver ? "text-red-500" : "text-foreground"}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -87,7 +90,7 @@ export const CircularProgress = ({
         
         {/* Remaining text */}
         <motion.p
-          className="text-[11px] text-muted-foreground"
+          className={`text-[11px] font-medium ${isOver ? "text-red-500" : "text-muted-foreground"}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
