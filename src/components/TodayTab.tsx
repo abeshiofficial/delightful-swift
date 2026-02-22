@@ -182,12 +182,10 @@ export const TodayTab = () => {
           whileTap={{ scale: 0.98 }}
         >
           <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-primary" />
-              <p className="text-xs font-semibold text-foreground">ブロック中</p>
-            </div>
+            <Shield className="w-4 h-4 text-primary" />
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </div>
+          <p className="text-xs font-semibold text-foreground">ブロック中</p>
           <div className="flex items-center gap-1.5">
             {["📸", "▶️", "🎵"].map((icon, i) => (
               <div key={i} className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-sm">
@@ -205,12 +203,10 @@ export const TodayTab = () => {
           whileTap={{ scale: 0.98 }}
         >
           <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-primary" />
-              <p className="text-xs font-semibold text-foreground">スケジュール</p>
-            </div>
+            <Calendar className="w-4 h-4 text-primary" />
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </div>
+          <p className="text-xs font-semibold text-foreground">スケジュール</p>
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-1">
               <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-muted">
