@@ -185,18 +185,28 @@ export const TodayTab = () => {
       <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3 relative z-10">
         <motion.button
           onClick={handleBlockedAppsClick}
-          className="flex items-center gap-3 p-4 rounded-2xl bg-white/80 border border-border text-left hover:bg-white/90 transition-colors"
+          className="flex flex-col gap-3 p-4 rounded-2xl bg-white/80 border border-border text-left hover:bg-white/90 transition-colors"
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.98 }}
         >
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-            <Shield className="w-5 h-5 text-primary" />
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-primary" />
+              <p className="text-xs font-semibold text-foreground leading-tight">ブロック中</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-foreground leading-tight">今ブロックしている</p>
-            <p className="text-xs font-semibold text-foreground leading-tight">アプリ一覧</p>
+          <div className="flex items-center gap-1.5">
+            {["📸", "▶️", "🎵"].map((icon, i) => (
+              <div
+                key={i}
+                className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-sm"
+              >
+                {icon}
+              </div>
+            ))}
+            <span className="text-[10px] text-muted-foreground font-medium ml-1">+2</span>
           </div>
-          <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
         </motion.button>
 
         <motion.button
