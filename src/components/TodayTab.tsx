@@ -155,17 +155,17 @@ export const TodayTab = () => {
           
           <div className="grid grid-cols-3 gap-4 w-full px-2">
             <StatBadge
-              icon={<Hand className="w-4 h-4" strokeWidth={2.5} />}
+              icon={<Hand className="w-4 h-4 text-foreground" strokeWidth={2.5} />}
               label="やめとく"
               value={`${mockData.cancelCount}`}
             />
             <StatBadge
-              icon={<Flame className="w-4 h-4" strokeWidth={2.5} />}
+              icon={<Flame className="w-4 h-4 text-foreground" strokeWidth={2.5} />}
               label="連続達成"
               value={`${mockData.streakDays}日`}
             />
             <StatBadge
-              icon={<Clock className="w-4 h-4" strokeWidth={2.5} />}
+              icon={<Clock className="w-4 h-4 text-foreground" strokeWidth={2.5} />}
               label="節約時間"
               value={`${mockData.savedMinutes}m`}
             />
@@ -182,7 +182,7 @@ export const TodayTab = () => {
           whileTap={{ scale: 0.98 }}
         >
           <div className="flex items-center justify-between w-full">
-            <Shield className="w-4 h-4 text-primary" />
+            <Shield className="w-4 h-4 text-foreground" />
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </div>
           <p className="text-xs font-semibold text-foreground">ブロック中</p>
@@ -203,7 +203,7 @@ export const TodayTab = () => {
           whileTap={{ scale: 0.98 }}
         >
           <div className="flex items-center justify-between w-full">
-            <Calendar className="w-4 h-4 text-primary" />
+            <Calendar className="w-4 h-4 text-foreground" />
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </div>
           <p className="text-xs font-semibold text-foreground">スケジュール</p>
