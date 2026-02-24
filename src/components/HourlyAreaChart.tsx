@@ -37,8 +37,8 @@ export const HourlyAreaChart = ({ data, currentHour }: HourlyAreaChartProps) => 
         >
           <defs>
             <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity={0.6} />
-              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={0.1} />
+              <stop offset="0%" stopColor="hsl(160 40% 55%)" stopOpacity={0.6} />
+              <stop offset="100%" stopColor="hsl(160 45% 65%)" stopOpacity={0.08} />
             </linearGradient>
           </defs>
           <XAxis
@@ -59,7 +59,7 @@ export const HourlyAreaChart = ({ data, currentHour }: HourlyAreaChartProps) => 
           <Area
             type="monotone"
             dataKey="minutes"
-            stroke="hsl(var(--primary))"
+            stroke="hsl(160 40% 55%)"
             strokeWidth={2}
             fill="url(#areaGradient)"
             animationDuration={1000}

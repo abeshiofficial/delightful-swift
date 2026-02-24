@@ -127,14 +127,14 @@ export const TodayTab = () => {
       <div 
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: `linear-gradient(180deg, 
-            rgba(180, 220, 200, 0.5) 0%, 
-            rgba(190, 200, 220, 0.45) 20%, 
-            rgba(200, 180, 220, 0.4) 40%, 
-            rgba(220, 170, 200, 0.35) 60%, 
-            rgba(230, 180, 190, 0.2) 80%, 
-            hsl(var(--background)) 100%
-          )`,
+          background: `
+            radial-gradient(ellipse 120% 60% at 50% 45%, 
+              rgba(170, 225, 200, 0.5) 0%, 
+              rgba(190, 210, 220, 0.4) 25%, 
+              rgba(220, 190, 210, 0.35) 50%, 
+              rgba(230, 180, 200, 0.2) 70%, 
+              transparent 100%
+            )`,
         }}
       />
       {/* Day Selector */}
