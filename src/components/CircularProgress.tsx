@@ -35,11 +35,16 @@ export const CircularProgress = ({
   const arcLength = Math.PI * radius;
   const clampedProgress = Math.min(progress, 100);
   const progressOffset = arcLength * (1 - clampedProgress / 100);
-  const progressColor = isOver ? "hsl(0 72% 60%)" : "hsl(var(--primary))";
+  const progressColor = isOver ? "hsl(0 72% 60%)" : "hsl(160 40% 55%)";
   return (
     <div className={`relative flex flex-col items-center ${className}`}>
       <svg width="240" height="120" viewBox="0 0 240 120">
         <defs>
+          {/* Gradient for progress arc */}
+          <linearGradient id="gaugeGradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="hsl(160 45% 65%)" />
+            <stop offset="100%" stopColor="hsl(160 35% 45%)" />
+          </linearGradient>
           {/* Stripe pattern for unfilled portion */}
           <pattern
             id="stripePattern"
@@ -81,7 +86,7 @@ export const CircularProgress = ({
         <motion.path
           d={arcPath}
           fill="none"
-          stroke={progressColor}
+          stroke={isOver ? progressColor : "url(#gaugeGradient)"}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeDasharray={arcLength}
