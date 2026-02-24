@@ -42,7 +42,7 @@ const mockHourlyData = [
 
 // Mock data
 const mockData = {
-  usageTimeMinutes: 620, // 10時間20分
+  usageTimeMinutes: 280, // 4時間40分
   goalMinutes: 480, // 8時間
   cancelCount: 10,
   streakDays: 9,
@@ -128,11 +128,10 @@ export const TodayTab = () => {
         className="absolute inset-0 pointer-events-none z-0"
         style={{
           background: `linear-gradient(180deg, 
-            rgba(160, 140, 210, 0.5) 0%, 
-            rgba(190, 150, 200, 0.4) 15%, 
-            rgba(220, 160, 170, 0.35) 35%, 
-            rgba(240, 180, 150, 0.25) 50%, 
-            rgba(245, 210, 180, 0.15) 65%, 
+            rgba(200, 220, 210, 0.5) 0%, 
+            rgba(210, 230, 220, 0.4) 15%, 
+            rgba(220, 235, 225, 0.3) 35%, 
+            rgba(235, 240, 235, 0.2) 55%, 
             hsl(var(--background)) 100%
           )`,
         }}
