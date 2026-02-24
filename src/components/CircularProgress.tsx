@@ -39,13 +39,42 @@ export const CircularProgress = ({
   return (
     <div className={`relative flex flex-col items-center ${className}`}>
       <svg width="240" height="120" viewBox="0 0 240 120">
-        {/* Background arc */}
+        <defs>
+          {/* Stripe pattern for unfilled portion */}
+          <pattern
+            id="stripePattern"
+            width="6"
+            height="6"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)"
+          >
+            <line x1="0" y1="0" x2="0" y2="6" stroke="hsl(var(--muted-foreground))" strokeWidth="1.5" strokeOpacity="0.18" />
+          </pattern>
+          <mask id="unfilledMask">
+            <path
+              d={arcPath}
+              fill="none"
+              stroke="white"
+              strokeWidth={strokeWidth}
+              strokeLinecap="round"
+            />
+          </mask>
+        </defs>
+
+        {/* Background arc (solid muted) */}
         <path
           d={arcPath}
           fill="none"
           stroke="hsl(var(--muted))"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
+        />
+
+        {/* Stripe overlay on unfilled portion */}
+        <rect
+          x="0" y="0" width="240" height="120"
+          fill="url(#stripePattern)"
+          mask="url(#unfilledMask)"
         />
         
         {/* Progress arc */}
@@ -61,6 +90,21 @@ export const CircularProgress = ({
           animate={{ strokeDashoffset: progressOffset }}
           transition={{ duration: 1, ease: "easeOut" }}
         />
+
+        {/* Boundary dot at progress tip */}
+        {clampedProgress > 0 && clampedProgress < 100 && (
+          <motion.circle
+            cx={centerX + radius * Math.cos(Math.PI - (Math.PI * clampedProgress / 100))}
+            cy={centerY - radius * Math.sin(Math.PI - (Math.PI * clampedProgress / 100))}
+            r={strokeWidth / 2 + 2}
+            fill="white"
+            stroke={progressColor}
+            strokeWidth="2.5"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.8, duration: 0.3 }}
+          />
+        )}
       </svg>
       
       {/* Center content */}
